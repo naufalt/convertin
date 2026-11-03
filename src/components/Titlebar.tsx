@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Minus, Square, X, Sun, Moon, Terminal, LayoutGrid, History, DownloadCloud } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import { UpdateModal } from './UpdateModal';
+import { APP_ICON_BASE64 } from '../assets/appIconBase64';
 
 export const Titlebar: React.FC = () => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -20,29 +21,26 @@ export const Titlebar: React.FC = () => {
   const handleClose = () => window.electronAPI?.closeWindow();
 
   return (
-    <header className="h-12 px-4 flex items-center justify-between select-none app-drag transition-colors duration-150 border-b dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/50 dark:bg-md-darkSurface bg-md-surface">
-      {/* Brand Identity: 3D App Icon */}
-      <div className="flex items-center gap-2.5 no-drag">
-        <div className="w-8 h-8 rounded-xl dark:bg-white/5 bg-black/5 p-1 border dark:border-white/10 border-black/5 flex items-center justify-center shadow-sm">
+    <header className="h-14 px-5 flex items-center justify-between select-none app-drag transition-colors duration-150 border-b dark:border-white/5 border-black/5 dark:bg-[#14121B] bg-white">
+      {/* Brand Identity: Prominent 3D App Icon & Headline */}
+      <div className="flex items-center gap-3 no-drag">
+        <div className="w-9 h-9 rounded-2xl dark:bg-white/5 bg-zinc-100 p-1.5 border dark:border-white/10 border-black/5 flex items-center justify-center shadow-sm">
           <img
-            src="/app-icon.png"
+            src={APP_ICON_BASE64}
             alt="Convertin"
-            className="w-6 h-6 object-contain"
-            onError={(e) => {
-              (e.target as HTMLElement).style.display = 'none';
-            }}
+            className="w-full h-full object-contain drop-shadow"
           />
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-bold text-sm tracking-tight dark:text-white text-zinc-900">
+          <span className="font-bold text-base tracking-tight dark:text-white text-zinc-900">
             Convertin
           </span>
           <span
             onClick={() => setShowUpdateModal(true)}
-            className="text-[10px] px-2 py-0.5 rounded-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant font-mono hover:dark:bg-md-darkPrimary hover:dark:text-md-darkOnPrimary hover:bg-md-primary hover:text-md-onPrimary cursor-pointer transition-colors"
-            title="Klik untuk cek update Convertin"
+            className="text-[11px] px-2.5 py-0.5 rounded-full dark:bg-white/5 bg-black/5 dark:text-zinc-300 text-zinc-700 font-mono hover:dark:bg-md-darkPrimary hover:dark:text-md-darkOnPrimary hover:bg-md-primary hover:text-md-onPrimary cursor-pointer transition-colors border dark:border-white/5 border-black/5"
+            title="Klik untuk cek pembaruan Convertin"
           >
-            v2.0
+            v2.1
           </span>
         </div>
       </div>

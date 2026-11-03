@@ -196,18 +196,24 @@ export function setupUpdateManager(mainWindow: Electron.BrowserWindow | null) {
     }
 
     try {
-      // Launch Inno Setup installer silently or standard mode
-      // /SILENT automatically updates existing installation without prompts
-      // Do not wait, launch detached
-      spawn(downloadedInstallerPath, ['/SILENT', '/CLOSEAPPLICATIONS'], {
-        detached: true,
-        stdio: 'ignore'
-      }).unref();
+      // In Inno Setup, /SP- disables the "This will install... Do you wish to continue?" prompt
+      // /SUPPRESSMSGBOXES prevents dialogs from popping up
+      // /SILENT runs the wizard without asking pages
+      // Launch installer detached so it proceeds after app exits
+      const child = spawn(
+        downloadedInstallerPath,
+        ['/SILENT', '/SP-', '/SUPPRESSMSGBOXES', '/CLOSEAPPLICATIONS', '/RESTARTAPPLICATIONS'],
+        {
+          detached: true,
+          stdio: 'ignore'
+        }
+      );
+      child.unref();
 
-      // Exit current application so installer can overwrite files
+      // Exit current application immediately so the installer can overwrite locked files
       setTimeout(() => {
-        app.quit();
-      }, 500);
+        app.exit(0);
+      }, 300);
 
       return { success: true };
     } catch (err: any) {

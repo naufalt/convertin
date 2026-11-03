@@ -1,89 +1,97 @@
 # Convertin
 
-Convertin is an offline desktop media and file conversion application built with Electron, React, TypeScript, and Tailwind CSS. It is designed to provide fast, privacy-focused conversions without relying on cloud services or external network connections.
+> **100% Free & Open-Source Offline Desktop Converter**  
+> Developed by **Naufaal Muhammad** ([@naufalt](https://github.com/naufalt))
+
+[English](#english) | [Bahasa Indonesia](#bahasa-indonesia)
 
 ---
 
-## Key Features
+<a name="english"></a>
+## English
 
-- **100% Offline Processing**: All conversions run locally using bundled FFmpeg, libwebp, native PDF rendering, and vector rasterizers. No telemetry or external server calls.
-- **Radial Donut Menu**: Quickly trigger conversions directly from Windows Explorer by selecting a file and pressing `Ctrl + Q` or `Alt + C`.
-- **System Tray Integration**: Background conversions execute silently in the Windows system tray with live progress tooltips and native notifications upon completion.
-- **Worker Thread Processing**: Heavy workloads (such as complex vector PDF rendering) run inside dedicated background worker threads to keep the user interface responsive.
-- **Real-Time Progress & Console Logs**: Live conversion progress, elapsed time, ETA estimates, and an integrated log viewer to track conversion details.
-- **Conversion History**: Track completed conversions with detailed comparisons (original vs converted file size, compression percentage, duration, and completion timestamp).
-- **Material Design 3 Theme**: Clean interface with full support for Light and Dark modes.
-- **System Telemetry**: Real-time display of CPU engine load, RAM utilization, and disk storage availability.
+Convertin is a modern, privacy-focused offline desktop file conversion application built with Electron, React, TypeScript, and Tailwind CSS. It handles media and document conversions directly on your local machine without sending your data to any cloud service.
 
----
+### 🌟 Key Features
 
-## Supported Formats
+- **100% Free & Offline**: Conversions run locally via embedded FFmpeg, libwebp, native PDF rendering, and vector rasterizers. No internet required, no subscriptions, zero tracking.
+- **OTA (Over-The-Air) Updates**: Seamless auto-update detection via GitHub Releases. Download and install new updates with one click.
+- **Radial Donut Menu**: Convert files instantly from Windows Explorer by selecting a file and pressing `Ctrl + Q` or `Alt + C`.
+- **System Tray Integration**: Run conversions quietly in the background with live progress in the tray tooltip and notifications upon completion.
+- **Worker Thread Architecture**: Heavy operations (e.g. multi-page vector PDF rasterization) run in dedicated background worker threads to keep the UI smooth and responsive.
+- **Real-Time Progress & Logs**: Accurate progress bar, elapsed time timer, ETA prediction, and a collapsible log drawer.
+- **Conversion History**: Easily review past conversions, file size comparisons (before & after), space saved, and timestamps.
+- **Modern Theme**: Clean Material Design 3 interface with Dark and Light mode support.
 
-- **Video**: MP4, MKV, WebM, MOV, AVI, FLV, WMV, GIF, MP3, WAV, AAC
+### 📁 Supported Formats
+
+- **Video**: MP4, MKV, WebM, MOV, AVI, FLV, WMV, GIF
 - **Audio**: MP3, WAV, FLAC, AAC, OGG, M4A, OPUS
-- **Image**: PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG, PDF
+- **Image**: PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG
 - **Document**: PDF to PNG, JPG, WEBP, ICO
 
----
+### ⌨️ Keyboard Shortcuts
 
-## Tech Stack
+- `Ctrl + Q`: Open Radial Donut wheel for selected file in Windows Explorer.
+- `Alt + C`: Alternative trigger for Radial wheel.
+- `Escape`: Close Radial wheel.
 
-- **Framework**: Electron 34
-- **Frontend**: React 19, TypeScript, Vite 6, Tailwind CSS
-- **Media Engine**: FFmpeg static build, `@resvg/resvg-js`, `pdf-lib`, `pdfjs-dist`, `@napi-rs/canvas`
-- **State Management**: Zustand
-- **Icons**: Lucide React
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20 or higher
-- Windows 10/11 (64-bit)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/naufalt/convertin.git
-   cd convertin
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Ensure FFmpeg binaries are in place:
-   Download and place `ffmpeg.exe` and `ffprobe.exe` inside the `resources/bin/` directory.
-
-### Running in Development Mode
+### 🛠️ Developer Setup
 
 ```bash
+# Clone repository
+git clone https://github.com/naufalt/convertin.git
+cd convertin
+
+# Install dependencies
+npm install
+
+# Run in development mode
 npm run dev
-```
-Alternatively, on Windows you can double-click `start-dev.bat`.
 
-### Building for Production
-
-To package the application into a standalone installer:
-```bash
-npm run build
+# Build unpacked app and installer
+node build_unpacked.js
+"C:\Program Files\Inno Setup 7\ISCC.exe" installer.iss
 ```
 
 ---
 
-## Shortcuts
+<a name="bahasa-indonesia"></a>
+## Bahasa Indonesia
 
-- `Ctrl + Q`: Open Radial Donut wheel for the selected file in Windows Explorer.
-- `Alt + C`: Alternative shortcut for the Radial Donut wheel.
-- `Escape`: Dismiss the Radial Donut wheel.
+Convertin adalah aplikasi konversi berkas dan media desktop yang modern, cepat, dan sepenuhnya offline. Dibuat menggunakan Electron, React, TypeScript, dan Tailwind CSS, Convertin memproses semua file langsung di perangkat lokal Anda tanpa ketergantungan pada server internet maupun layanan cloud.
+
+### 🌟 Fitur Utama
+
+- **100% Gratis & Bebas Iklan**: Semua proses konversi berjalan langsung di komputer Anda. Data pribadi Anda tetap aman dan tidak pernah diunggah ke internet.
+- **Fitur Update Otomatis (OTA)**: Mendeteksi versi terbaru langsung dari GitHub Releases. Pengguna dapat mengunduh dan memperbarui aplikasi secara otomatis hanya dengan satu klik.
+- **Menu Cepat Donut Radial**: Ubah format file langsung dari Windows Explorer tanpa perlu membuka jendela utama, cukup pilih file dan tekan `Ctrl + Q` atau `Alt + C`.
+- **Integrasi System Tray**: Konversi dapat berjalan di latar belakang (tray) dengan tooltip persentase realtime dan notifikasi ketika selesai.
+- **Performa Responsif (Worker Thread)**: Proses berat seperti render PDF multi-halaman berukuran besar dijalankan pada thread terpisah, sehingga aplikasi tetap lancar tanpa *Not Responding*.
+- **Estimasi Waktu & Log Realtime**: Dilengkapi durasi proses berjalan, estimasi selesai (ETA), dan drawer log teknis untuk melihat detail konversi.
+- **Riwayat Konversi (History)**: Menampilkan daftar file yang sudah selesai dikonversi, perbandingan ukuran sebelum & sesudah, serta waktu prosesnya.
+- **Tampilan Elegan**: Mengadopsi desain Material Design 3 dengan pilihan tema Gelap (Dark Mode) dan Terang (Light Mode).
+
+### 📁 Format yang Didukung
+
+- **Video**: MP4, MKV, WebM, MOV, AVI, FLV, WMV, GIF
+- **Audio**: MP3, WAV, FLAC, AAC, OGG, M4A, OPUS
+- **Gambar**: PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG
+- **Dokumen**: PDF ke PNG, JPG, WEBP, ICO
+
+### ⌨️ Pintasan Tombol (Shortcuts)
+
+- `Ctrl + Q`: Membuka menu radial cepat untuk file yang dipilih di Explorer.
+- `Alt + C`: Pintasan alternatif menu radial.
+- `Escape`: Menutup menu radial.
 
 ---
 
-## License
+## 👨‍💻 Developer
 
-This project is licensed under the MIT License.
+Dibuat dan dikembangkan oleh **Naufaal Muhammad**  
+GitHub: [@naufalt](https://github.com/naufalt)
 
+## 📄 Lisensi
+
+Proyek ini dirilis secara bebas dan gratis di bawah lisensi [MIT License](LICENSE).

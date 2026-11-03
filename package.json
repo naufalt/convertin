@@ -5,8 +5,37 @@
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build",
+    "package": "tsc && vite build && electron-builder --dir",
     "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.convertin.desktop",
+    "productName": "Convertin",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "resources/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/bin",
+        "to": "bin",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "resources/icons",
+        "to": "icons",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": "dir",
+      "icon": "resources/icons/app_tray.ico"
+    }
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.1.0",

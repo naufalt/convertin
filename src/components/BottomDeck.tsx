@@ -6,7 +6,7 @@ interface Props {
   onStartConvertAll: () => void;
 }
 
-export const BottomDeck: React.FC = ({ onStartConvertAll }: Props) => {
+export const BottomDeck: React.FC<Props> = ({ onStartConvertAll }) => {
   const queue = useAppStore((state) => state.queue);
   const settings = useAppStore((state) => state.settings);
   const isProcessing = useAppStore((state) => state.isProcessing);

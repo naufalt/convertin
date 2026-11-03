@@ -13,8 +13,10 @@ export interface ElectronAPI {
     targetFormat: string;
     mediaType: string;
     useNvenc: boolean;
-  }) => Promise<{ success: boolean; error?: string; outputPath?: string }>;
+  }) => Promise<{ success: boolean; error?: string; outputPath?: string; outputSize?: number }>;
   cancelConversion: (id: string) => Promise<boolean>;
+  getPathForFile?: (file: File) => string;
+  onRadialTaskCompleted?: (callback: (data: any) => void) => () => void;
   openPath: (path: string) => Promise<void>;
   showItemInFolder: (path: string) => Promise<void>;
   minimizeWindow: () => void;

@@ -11,7 +11,6 @@ export interface OfficeCapabilities {
 let cachedCapabilities: OfficeCapabilities | null = null;
 
 function getScriptPath(): string {
-  // In dev or prod unpacked
   const devPath = path.join(__dirname, 'officeHelper.ps1');
   if (fs.existsSync(devPath)) return devPath;
 
@@ -40,7 +39,16 @@ export async function checkOfficeCapabilities(): Promise<OfficeCapabilities> {
     let stdout = '';
     child.stdout.on('data', (d) => (stdout += d.toString()));
 
+    const timeout = setTimeout(() => {
+      try {
+        child.kill();
+      } catch {}
+      cachedCapabilities = { word: false, excel: false, powerpoint: false };
+      resolve(cachedCapabilities);
+    }, 5000);
+
     child.on('close', (code) => {
+      clearTimeout(timeout);
       if (code === 0) {
         try {
           const parsed = JSON.parse(stdout.trim());
@@ -58,6 +66,7 @@ export async function checkOfficeCapabilities(): Promise<OfficeCapabilities> {
     });
 
     child.on('error', () => {
+      clearTimeout(timeout);
       cachedCapabilities = { word: false, excel: false, powerpoint: false };
       resolve(cachedCapabilities);
     });
@@ -95,6 +104,8 @@ export async function convertOfficeDocument(
 
   const scriptPath = getScriptPath();
   return new Promise((resolve) => {
+    let resolved = false;
+
     const child = spawn('powershell.exe', [
       '-NoProfile',
       '-ExecutionPolicy',
@@ -109,12 +120,27 @@ export async function convertOfficeDocument(
       outputPath
     ]);
 
+    // Safety timeout: 45 seconds maximum for office COM automation
+    const timer = setTimeout(() => {
+      if (!resolved) {
+        resolved = true;
+        try {
+          child.kill('SIGTERM');
+        } catch {}
+        resolve({
+          success: false,
+          error:
+            'Proses konversi Office memakan waktu terlalu lama atau menunggu konfirmasi dialog pop-up dari Microsoft Word. Pastikan Microsoft Office tidak sedang menampilkan dialog lisensi / aktivasi.'
+        });
+      }
+    }, 45000);
+
     let stderr = '';
     let stdout = '';
 
     child.stdout.on('data', (d) => {
       stdout += d.toString();
-      if (onProgress) onProgress(60);
+      if (onProgress) onProgress(65);
     });
 
     child.stderr.on('data', (d) => {
@@ -122,20 +148,32 @@ export async function convertOfficeDocument(
     });
 
     child.on('close', (code) => {
+      clearTimeout(timer);
+      if (resolved) return;
+      resolved = true;
+
+      const trimmedErr = stderr.trim();
       if (code === 0 && fs.existsSync(outputPath)) {
         if (onProgress) onProgress(100);
         resolve({ success: true, outputPath });
       } else {
+        let userFriendlyError = trimmedErr || stdout.trim() || 'Office automation gagal memproses berkas.';
+        if (userFriendlyError.includes('E_ACCESSDENIED') || userFriendlyError.includes('80070005')) {
+          userFriendlyError =
+            'Akses Word COM Ditolak oleh Windows (HRESULT 80070005). Microsoft Word membutuhkan izin Administrator atau sedang dikunci oleh proses background lain.';
+        }
         resolve({
           success: false,
-          error: stderr.trim() || stdout.trim() || 'Office automation gagal memproses berkas.'
+          error: userFriendlyError
         });
       }
     });
 
     child.on('error', (err) => {
+      clearTimeout(timer);
+      if (resolved) return;
+      resolved = true;
       resolve({ success: false, error: err.message });
     });
   });
 }
-

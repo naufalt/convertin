@@ -348,6 +348,15 @@ async function runBackgroundRadialConversion(files: any[], targetFormat: string)
       } else {
         currentTrayStatusText = `Failed: ${file.name}`;
         updateTrayMenu();
+
+        // Notify main window queue of failure
+        if (mainWindow) {
+          mainWindow.webContents.send('radial:task-completed', {
+            fileName: file.name,
+            error: result.error || 'Konversi gagal',
+          });
+        }
+
         try {
           if (Notification.isSupported()) {
             new Notification({

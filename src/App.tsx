@@ -176,11 +176,18 @@ export const App: React.FC = () => {
         const items = useAppStore.getState().queue;
         const match = items.find((i) => i.name === data.fileName);
         if (match) {
-          updateStatus(match.id, 'completed', undefined, data.outputPath, {
-            outputSize: data.outputSize,
-            completedAt: new Date().toLocaleTimeString(),
-          });
-          addLog('success', `Completed (Radial): ${data.fileName} -> ${data.outputPath}`);
+          if (data.error) {
+            updateStatus(match.id, 'error', data.error, undefined, {
+              completedAt: new Date().toLocaleTimeString(),
+            });
+            addLog('error', `Failed (Radial): ${data.fileName} - ${data.error}`);
+          } else {
+            updateStatus(match.id, 'completed', undefined, data.outputPath, {
+              outputSize: data.outputSize,
+              completedAt: new Date().toLocaleTimeString(),
+            });
+            addLog('success', `Completed (Radial): ${data.fileName} -> ${data.outputPath}`);
+          }
         }
       });
 

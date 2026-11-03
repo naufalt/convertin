@@ -40,7 +40,7 @@ export const Titlebar: React.FC = () => {
             className="text-[11px] px-2.5 py-0.5 rounded-full dark:bg-white/5 bg-black/5 dark:text-zinc-300 text-zinc-700 font-mono hover:dark:bg-md-darkPrimary hover:dark:text-md-darkOnPrimary hover:bg-md-primary hover:text-md-onPrimary cursor-pointer transition-colors border dark:border-white/5 border-black/5"
             title="Klik untuk cek pembaruan Convertin"
           >
-            v2.1
+            v2.1.1
           </span>
         </div>
       </div>

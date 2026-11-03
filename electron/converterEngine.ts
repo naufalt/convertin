@@ -8,6 +8,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { Worker } from 'node:worker_threads';
 import Module from 'node:module';
 import { convertOfficeDocument } from './officeEngine';
+import { inspectPdfForDocxConversion } from './pdfInspector';
 
 // Polyfill and intercept canvas for pdfjs-dist
 const canvasModule = require('@napi-rs/canvas');
@@ -146,6 +147,18 @@ export async function executeConversion(
   const isOfficeTarget = ['docx', 'doc'].includes(targetExt);
   if ((isOfficeInput && targetExt === 'pdf') || (inputExt === 'pdf' && isOfficeTarget)) {
     try {
+      // Pre-flight inspection for PDF to DOCX: Check if PDF has real text or is just scanned images
+      if (inputExt === 'pdf' && isOfficeTarget) {
+        mainWindow?.webContents.send('conversion-progress', { id, percent: 10 });
+        const inspection = await inspectPdfForDocxConversion(inputPath);
+        if (!inspection.isConvertibleToDocx) {
+          return {
+            success: false,
+            error: inspection.reason || 'Berkas PDF ini murni berisi gambar/scan tanpa teks digital, sehingga tidak dapat dikonversi ke DOCX.'
+          };
+        }
+      }
+
       mainWindow?.webContents.send('conversion-progress', { id, percent: 30 });
       const res = await convertOfficeDocument(inputPath, finalOutputPath, targetExt, (pct) => {
         mainWindow?.webContents.send('conversion-progress', { id, percent: pct });

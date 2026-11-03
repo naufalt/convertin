@@ -1,8 +1,10 @@
-import React from 'react';
-import { Minus, Square, X, Sun, Moon, Terminal, LayoutGrid, History } from 'lucide-react';
+import React, { useState } from 'react';
+import { Minus, Square, X, Sun, Moon, Terminal, LayoutGrid, History, DownloadCloud } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { UpdateModal } from './UpdateModal';
 
 export const Titlebar: React.FC = () => {
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   const theme = useAppStore((state) => state.theme);
   const toggleTheme = useAppStore((state) => state.toggleTheme);
   const showLogs = useAppStore((state) => state.showLogs);
@@ -33,7 +35,11 @@ export const Titlebar: React.FC = () => {
           <span className="font-semibold text-sm tracking-normal dark:text-md-darkOnSurface text-md-onSurface">
             Convertin
           </span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant font-mono">
+          <span
+            onClick={() => setShowUpdateModal(true)}
+            className="text-[10px] px-2 py-0.5 rounded-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant font-mono hover:dark:bg-md-darkPrimary hover:dark:text-md-darkOnPrimary hover:bg-md-primary hover:text-md-onPrimary cursor-pointer transition-colors"
+            title="Klik untuk cek update Convertin"
+          >
             v2.0
           </span>
         </div>
@@ -77,6 +83,15 @@ export const Titlebar: React.FC = () => {
 
       {/* Right Actions: Theme, Logs, & Window Controls */}
       <div className="no-drag flex items-center gap-1">
+        {/* Update Button */}
+        <button
+          onClick={() => setShowUpdateModal(true)}
+          className="w-8 h-8 rounded-full flex items-center justify-center dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant dark:hover:bg-md-darkSurfaceVariant hover:bg-md-surfaceVariant transition-colors"
+          title="Cek Pembaruan Convertin"
+        >
+          <DownloadCloud className="w-4 h-4" />
+        </button>
+
         {/* Toggle Logs Button */}
         <button
           onClick={toggleShowLogs}
@@ -128,6 +143,8 @@ export const Titlebar: React.FC = () => {
           <X className="w-4 h-4" />
         </button>
       </div>
+
+      <UpdateModal isOpen={showUpdateModal} onClose={() => setShowUpdateModal(false)} />
     </header>
   );
 };

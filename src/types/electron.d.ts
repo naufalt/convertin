@@ -29,6 +29,22 @@ export interface ElectronAPI {
   onAddFiles: (callback: (files: Array<{ name: string; path: string; size: number }>) => void) => () => void;
   onRadialSetFiles: (callback: (data: { files: Array<{ name: string; path: string; size: number }>; theme: string }) => void) => () => void;
   onRadialConvertAction: (callback: (targetFormat: string) => void) => () => void;
+
+  // OTA Updater
+  checkForUpdates?: () => Promise<{
+    hasUpdate: boolean;
+    currentVersion: string;
+    latestVersion: string;
+    releaseName: string;
+    releaseNotes: string;
+    downloadUrl?: string;
+    fileName?: string;
+    publishedAt?: string;
+  }>;
+  downloadUpdate?: (downloadUrl: string) => Promise<{ success: boolean; error?: string }>;
+  installUpdate?: () => Promise<{ success: boolean; error?: string }>;
+  openReleasePage?: () => Promise<void>;
+  onUpdateDownloadProgress?: (callback: (data: { percent: number; receivedBytes: number; totalBytes: number }) => void) => () => void;
 }
 
 declare global {

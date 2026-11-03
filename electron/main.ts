@@ -19,6 +19,7 @@ import { exec } from 'node:child_process';
 import { detectHardwareCapabilities } from './binaryResolver';
 import { executeConversion, cancelProcess, ConvertOptions } from './converterEngine';
 import { probeMediaFile } from './probeEngine';
+import { setupUpdateManager } from './updateManager';
 
 // Ensure Windows notification App User Model ID is registered
 if (process.platform === 'win32' && app) {
@@ -137,6 +138,9 @@ function createMainWindow() {
   } else {
     mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
   }
+
+  // Setup OTA update handlers for main window
+  setupUpdateManager(mainWindow);
 
   mainWindow.on('close', (event) => {
     if (!isQuitting) {

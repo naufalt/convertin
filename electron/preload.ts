@@ -60,5 +60,18 @@ contextBridge.exposeInMainWorld('electronAPI', {
     return () => {
       ipcRenderer.removeListener('radial:task-completed', handler);
     };
+  },
+
+  // OTA Updater API
+  checkForUpdates: () => ipcRenderer.invoke('updater:check'),
+  downloadUpdate: (downloadUrl: string) => ipcRenderer.invoke('updater:download', downloadUrl),
+  installUpdate: () => ipcRenderer.invoke('updater:install'),
+  openReleasePage: () => ipcRenderer.invoke('updater:open-release-page'),
+  onUpdateDownloadProgress: (callback: (data: { percent: number; receivedBytes: number; totalBytes: number }) => void) => {
+    const handler = (_event: any, data: any) => callback(data);
+    ipcRenderer.on('updater:download-progress', handler);
+    return () => {
+      ipcRenderer.removeListener('updater:download-progress', handler);
+    };
   }
 });

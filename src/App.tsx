@@ -339,51 +339,56 @@ export const App: React.FC = () => {
         </main>
 
         {/* Live Hardware & Storage Telemetry Gimmick Panel */}
-        <aside className="w-68 p-5 flex flex-col justify-between dark:bg-md-darkSurfaceVariant/15 bg-md-surfaceVariant/15 select-none overflow-y-auto">
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b dark:border-md-darkOutlineVariant/30 border-md-outlineVariant/30">
-              <Activity className="w-4 h-4 dark:text-md-darkPrimary text-md-primary" />
-              <span className="text-xs font-semibold uppercase tracking-wider dark:text-md-darkOnSurface text-md-onSurface">
-                System Telemetry
+        <aside className="w-72 p-5 flex flex-col justify-between dark:bg-[#14121B] bg-zinc-50/80 select-none overflow-y-auto border-l dark:border-white/5 border-black/5">
+          <div className="space-y-3.5">
+            <div className="flex items-center justify-between pb-2 border-b dark:border-white/5 border-black/5">
+              <div className="flex items-center gap-2">
+                <Activity className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs font-bold uppercase tracking-wider dark:text-zinc-200 text-zinc-800">
+                  Hardware Status
+                </span>
+              </div>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full dark:bg-emerald-950/40 bg-emerald-50 dark:text-emerald-400 text-emerald-600 font-semibold">
+                Online
               </span>
             </div>
 
             {/* Live CPU & GPU Engine Load Gauge */}
-            <div className="p-3.5 rounded-2xl dark:bg-md-darkSurface bg-md-surface border dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/40 shadow-sm space-y-2">
+            <div className="p-3.5 rounded-2xl dark:bg-white/[0.03] bg-white border dark:border-white/5 border-black/5 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-medium dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">
-                  Engine Load ({system.nvencSupported ? 'GPU' : 'CPU'})
+                <span className="text-[11px] font-medium dark:text-zinc-400 text-zinc-600">
+                  Engine Load ({system.nvencSupported ? 'GPU Accelerated' : 'CPU Cores'})
                 </span>
-                <span className="text-xs font-mono font-bold dark:text-md-darkPrimary text-md-primary">
+                <span className="text-xs font-mono font-bold dark:text-white text-zinc-900">
                   {telemetry.cpuUsage}%
                 </span>
               </div>
 
-              <div className="h-1.5 w-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant rounded-full overflow-hidden">
+              <div className="h-1.5 w-full dark:bg-white/10 bg-zinc-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full dark:bg-md-darkPrimary bg-md-primary transition-all duration-300 rounded-full"
+                  className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
                   style={{ width: `${telemetry.cpuUsage}%` }}
                 />
               </div>
 
-              <div className="flex items-center gap-1.5 text-[10px] dark:text-md-darkOnSurfaceVariant/80 text-md-onSurfaceVariant/80 pt-0.5">
-                {system.nvencSupported ? <Zap className="w-3 h-3 text-emerald-500" /> : <Cpu className="w-3 h-3 text-zinc-400" />}
-                <span>{system.nvencSupported ? 'NVENC CUDA Accelerating' : 'Multi-core processing'}</span>
+              <div className="flex items-center gap-1.5 text-[10px] dark:text-zinc-400 text-zinc-500 pt-0.5">
+                {system.nvencSupported ? <Zap className="w-3 h-3 text-emerald-400" /> : <Cpu className="w-3 h-3 text-zinc-400" />}
+                <span>{system.nvencSupported ? 'NVIDIA NVENC CUDA Active' : 'Multi-core Worker Threads'}</span>
               </div>
             </div>
 
             {/* Live RAM & Memory Usage */}
-            <div className="p-3.5 rounded-2xl dark:bg-md-darkSurface bg-md-surface border dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/40 shadow-sm space-y-2">
+            <div className="p-3.5 rounded-2xl dark:bg-white/[0.03] bg-white border dark:border-white/5 border-black/5 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-medium dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">
-                  Memory (RAM)
+                <span className="text-[11px] font-medium dark:text-zinc-400 text-zinc-600">
+                  System Memory (RAM)
                 </span>
-                <span className="text-[11px] font-mono dark:text-md-darkOnSurface text-md-onSurface font-semibold">
+                <span className="text-[11px] font-mono dark:text-white text-zinc-900 font-semibold">
                   {telemetry.ramUsedGb} / {telemetry.ramTotalGb} GB
                 </span>
               </div>
 
-              <div className="h-1.5 w-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant rounded-full overflow-hidden">
+              <div className="h-1.5 w-full dark:bg-white/10 bg-zinc-200 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-indigo-500 transition-all duration-300 rounded-full"
                   style={{ width: `${ramPercentage}%` }}
@@ -392,56 +397,58 @@ export const App: React.FC = () => {
             </div>
 
             {/* Storage Drive Capacity Gauge */}
-            <div className="p-3.5 rounded-2xl dark:bg-md-darkSurface bg-md-surface border dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/40 shadow-sm space-y-2">
+            <div className="p-3.5 rounded-2xl dark:bg-white/[0.03] bg-white border dark:border-white/5 border-black/5 shadow-sm space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <HardDrive className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-                  <span className="text-[11px] font-medium dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">
+                  <HardDrive className="w-3.5 h-3.5 text-cyan-500" />
+                  <span className="text-[11px] font-medium dark:text-zinc-400 text-zinc-600">
                     Storage Disk (C:)
                   </span>
                 </div>
-                <span className="text-[11px] font-mono dark:text-md-darkOnSurface text-md-onSurface font-semibold">
+                <span className="text-[11px] font-mono dark:text-white text-zinc-900 font-semibold">
                   {telemetry.storageFreeGb} GB free
                 </span>
               </div>
 
-              <div className="h-1.5 w-full dark:bg-md-darkSurfaceVariant bg-md-surfaceVariant rounded-full overflow-hidden">
+              <div className="h-1.5 w-full dark:bg-white/10 bg-zinc-200 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-cyan-600 dark:bg-cyan-400 transition-all duration-300 rounded-full"
+                  className="h-full bg-cyan-500 transition-all duration-300 rounded-full"
                   style={{ width: `${storagePercentage}%` }}
                 />
               </div>
 
-              <div className="text-[10px] dark:text-md-darkOnSurfaceVariant/80 text-md-onSurfaceVariant/80 text-right">
+              <div className="text-[10px] dark:text-zinc-500 text-zinc-400 text-right">
                 {storageUsedGb} GB used of {telemetry.storageTotalGb} GB
               </div>
             </div>
 
             {/* Conversion Metrics */}
-            <div className="p-3.5 rounded-2xl dark:bg-md-darkSurface bg-md-surface border dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/40 shadow-sm">
-              <span className="text-[11px] font-medium dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">
-                Session Stats
+            <div className="p-3.5 rounded-2xl dark:bg-white/[0.03] bg-white border dark:border-white/5 border-black/5 shadow-sm">
+              <span className="text-[11px] font-medium dark:text-zinc-400 text-zinc-600">
+                Session Conversion Stats
               </span>
               <div className="grid grid-cols-2 gap-2 text-center pt-2">
-                <div className="p-2 rounded-xl dark:bg-md-darkSurfaceVariant/30 bg-md-surfaceVariant/30">
-                  <div className="text-base font-bold dark:text-md-darkPrimary text-md-primary">{totalCompleted}</div>
-                  <div className="text-[10px] dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">Done</div>
+                <div className="p-2.5 rounded-xl dark:bg-emerald-950/20 bg-emerald-50/50 border dark:border-emerald-900/30 border-emerald-200">
+                  <div className="text-lg font-bold text-emerald-500">{totalCompleted}</div>
+                  <div className="text-[10px] dark:text-zinc-400 text-zinc-600 font-medium">Completed</div>
                 </div>
-                <div className="p-2 rounded-xl dark:bg-md-darkSurfaceVariant/30 bg-md-surfaceVariant/30">
-                  <div className="text-base font-bold dark:text-md-darkOnSurface text-md-onSurface">{totalConverting}</div>
-                  <div className="text-[10px] dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant">Active</div>
+                <div className="p-2.5 rounded-xl dark:bg-white/5 bg-zinc-100 border dark:border-white/5 border-black/5">
+                  <div className="text-lg font-bold dark:text-white text-zinc-900">{totalConverting}</div>
+                  <div className="text-[10px] dark:text-zinc-400 text-zinc-600 font-medium">Active</div>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Offline & Shortcuts Footer */}
-          <div className="pt-3 border-t dark:border-md-darkOutlineVariant/20 border-md-outlineVariant/20 text-[10px] dark:text-md-darkOnSurfaceVariant text-md-onSurfaceVariant space-y-1">
-            <div className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
-              <CheckCircle2 className="w-3 h-3" />
-              <span>100% Offline Engine</span>
+          <div className="pt-3 border-t dark:border-white/5 border-black/5 text-[10px] dark:text-zinc-400 text-zinc-500 space-y-1.5">
+            <div className="flex items-center gap-1.5 font-semibold text-emerald-500">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              <span>100% Offline Processing Engine</span>
             </div>
-            <div className="font-mono text-[9.5px]">Trigger: Select file & press <span className="font-bold dark:text-md-darkPrimary text-md-primary">Ctrl+Q</span> or <span className="font-bold dark:text-md-darkPrimary text-md-primary">Alt+C</span></div>
+            <div className="font-mono text-[10px] dark:text-zinc-400 text-zinc-600">
+              Shortcut: <span className="font-bold text-md-primary dark:text-md-darkPrimary">Ctrl+Q</span> or <span className="font-bold text-md-primary dark:text-md-darkPrimary">Alt+C</span>
+            </div>
           </div>
         </aside>
       </div>

@@ -33,9 +33,9 @@ export const CONVERSION_MATRIX = {
     }
   },
   document: {
-    inputs: ['pdf'],
-    outputs: ['png', 'jpg', 'webp'],
-    defaultOutput: 'png'
+    inputs: ['pdf', 'docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'txt', 'rtf', 'csv'],
+    outputs: ['pdf', 'docx', 'png', 'jpg', 'webp'],
+    defaultOutput: 'pdf'
   }
 };
 
@@ -49,11 +49,20 @@ export function detectMediaType(extension: string): 'video' | 'audio' | 'image' 
 }
 
 export function getSupportedOutputs(extension: string): string[] {
-  const type = detectMediaType(extension);
+  const ext = extension.toLowerCase().replace(/^\./, '');
+  const type = detectMediaType(ext);
   if (type === 'video') return CONVERSION_MATRIX.video.outputs;
   if (type === 'audio') return CONVERSION_MATRIX.audio.outputs;
   if (type === 'image') return CONVERSION_MATRIX.image.outputs;
-  if (type === 'document') return CONVERSION_MATRIX.document.outputs;
+  if (type === 'document') {
+    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(ext)) {
+      return ['pdf'];
+    }
+    if (ext === 'pdf') {
+      return ['docx', 'png', 'jpg', 'webp'];
+    }
+    return CONVERSION_MATRIX.document.outputs;
+  }
   return [];
 }
 
@@ -70,7 +79,13 @@ export function getDefaultTargetFormat(extension: string): string {
     return ext === 'png' ? 'jpg' : 'png';
   }
   if (type === 'document') {
-    return 'png';
+    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(ext)) {
+      return 'pdf';
+    }
+    if (ext === 'pdf') {
+      return 'docx';
+    }
+    return 'pdf';
   }
   return 'png';
 }

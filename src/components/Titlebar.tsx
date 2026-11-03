@@ -23,16 +23,18 @@ export const Titlebar: React.FC = () => {
     <header className="h-12 px-4 flex items-center justify-between select-none app-drag transition-colors duration-150 border-b dark:border-md-darkOutlineVariant/40 border-md-outlineVariant/50 dark:bg-md-darkSurface bg-md-surface">
       {/* Brand Identity: 3D App Icon */}
       <div className="flex items-center gap-2.5 no-drag">
-        <img
-          src="/app-icon.png"
-          alt="Convertin"
-          className="w-7 h-7 object-contain drop-shadow"
-          onError={(e) => {
-            (e.target as HTMLElement).style.display = 'none';
-          }}
-        />
+        <div className="w-8 h-8 rounded-xl dark:bg-white/5 bg-black/5 p-1 border dark:border-white/10 border-black/5 flex items-center justify-center shadow-sm">
+          <img
+            src="/app-icon.png"
+            alt="Convertin"
+            className="w-6 h-6 object-contain"
+            onError={(e) => {
+              (e.target as HTMLElement).style.display = 'none';
+            }}
+          />
+        </div>
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-sm tracking-normal dark:text-md-darkOnSurface text-md-onSurface">
+          <span className="font-bold text-sm tracking-tight dark:text-white text-zinc-900">
             Convertin
           </span>
           <span

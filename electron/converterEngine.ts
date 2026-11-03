@@ -7,6 +7,7 @@ import { PDFDocument } from 'pdf-lib';
 import { Resvg } from '@resvg/resvg-js';
 import { Worker } from 'node:worker_threads';
 import Module from 'node:module';
+import { convertOfficeDocument } from './officeEngine';
 
 // Polyfill and intercept canvas for pdfjs-dist
 const canvasModule = require('@napi-rs/canvas');
@@ -139,6 +140,22 @@ export async function executeConversion(
 
   const inputExt = path.extname(inputPath).toLowerCase().replace('.', '');
   const targetExt = targetFormat.toLowerCase();
+
+  // Special handler: Office Documents (docx, pptx, xlsx to PDF, or PDF to docx)
+  const isOfficeInput = ['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(inputExt);
+  const isOfficeTarget = ['docx', 'doc'].includes(targetExt);
+  if ((isOfficeInput && targetExt === 'pdf') || (inputExt === 'pdf' && isOfficeTarget)) {
+    try {
+      mainWindow?.webContents.send('conversion-progress', { id, percent: 30 });
+      const res = await convertOfficeDocument(inputPath, finalOutputPath, targetExt, (pct) => {
+        mainWindow?.webContents.send('conversion-progress', { id, percent: pct });
+        onProgressUpdate?.(pct);
+      });
+      return res;
+    } catch (err: any) {
+      return { success: false, error: err?.message || 'Gagal memproses dokumen Office' };
+    }
+  }
 
   // Special handler: Image to PDF
   if (targetExt === 'pdf') {

@@ -197,8 +197,9 @@ export function setupUpdateManager(mainWindow: Electron.BrowserWindow | null) {
 
     try {
       // Launch Inno Setup installer silently or standard mode
-      // /SILENT launches installer with minimal wizard, automatically updating existing installation
-      spawn(downloadedInstallerPath, ['/SILENT'], {
+      // /SILENT automatically updates existing installation without prompts
+      // Do not wait, launch detached
+      spawn(downloadedInstallerPath, ['/SILENT', '/CLOSEAPPLICATIONS'], {
         detached: true,
         stdio: 'ignore'
       }).unref();

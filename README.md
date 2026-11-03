@@ -92,6 +92,30 @@ Convertin adalah aplikasi konversi berkas dan media desktop yang modern, cepat, 
 Dibuat dan dikembangkan oleh **Naufaal Muhammad**  
 GitHub: [@naufalt](https://github.com/naufalt)
 
-## 📄 Lisensi
+---
 
-Proyek ini dirilis secara bebas dan gratis di bawah lisensi [MIT License](LICENSE).
+## 📄 Licenses & Third-Party Credits
+
+Convertin is distributed under the **[MIT License](LICENSE)**:
+- Copyright (c) 2026 Naufaal Muhammad.
+- You are free to use, copy, modify, merge, publish, and distribute this software for personal or commercial purposes.
+
+### Third-Party Open Source Libraries & Components:
+
+This application bundles and makes use of the following open-source software:
+
+- **[FFmpeg](https://ffmpeg.org/)**  
+  Licensed under [LGPL v2.1+ / GPL v3+](https://www.gnu.org/licenses/). FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
+- **[Electron](https://github.com/electron/electron)**  
+  Licensed under the [MIT License](https://github.com/electron/electron/blob/main/LICENSE). Copyright (c) Electron contributors.
+- **[PDF.js (pdfjs-dist)](https://github.com/mozilla/pdf.js)**  
+  Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Copyright (c) Mozilla Foundation.
+- **[@resvg/resvg-js](https://github.com/yisibl/resvg-js)**  
+  Licensed under the [MPL-2.0 License](https://www.mozilla.org/en-US/MPL/2.0/). High-performance SVG renderer.
+- **[@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)**  
+  Licensed under the [MIT License](https://github.com/Brooooooklyn/canvas/blob/main/LICENSE).
+- **[pdf-lib](https://github.com/Hopding/pdf-lib)**  
+  Licensed under the [MIT License](https://github.com/Hopding/pdf-lib/blob/master/LICENSE.md).
+- **[Lucide Icons](https://lucide.dev/)**  
+  Licensed under the [ISC License](https://lucide.dev/license).
+

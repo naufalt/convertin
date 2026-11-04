@@ -23,10 +23,19 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Inno Setup
-        uses: Kevin-De-Koninck/setup-innosetup@v2
-        with:
-          version: 'latest'
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          choco install innosetup --no-progress -y
+          $innoPath = "C:\Program Files (x86)\Inno Setup 6"
+          if (-not (Test-Path $innoPath)) {
+            $innoPath = "C:\Program Files\Inno Setup 7"
+          }
+          if (-not (Test-Path $innoPath)) {
+            $innoPath = "C:\Program Files\Inno Setup 6"
+          }
+          Write-Host "Inno Setup path: $innoPath"
+          "$innoPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Download FFmpeg Binaries
         shell: pwsh

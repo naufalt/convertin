@@ -53,25 +53,13 @@ jobs:
           }
 
       - name: Install Dependencies
-        run: npm ci --omit=optional
+        run: npm ci
 
       - name: Build Web App & Electron
         run: npm run build
 
-      - name: Prepare Unpacked App Directory
-        shell: pwsh
-        run: |
-          # Render structure into release/win-unpacked for Inno Setup
-          New-Item -ItemType Directory -Force -Path "release/win-unpacked/resources/app"
-          Copy-Item -Path "dist" -Destination "release/win-unpacked/resources/app/dist" -Recurse -Force
-          Copy-Item -Path "dist-electron" -Destination "release/win-unpacked/resources/app/dist-electron" -Recurse -Force
-          Copy-Item -Path "resources" -Destination "release/win-unpacked/resources" -Recurse -Force
-          Copy-Item -Path "package.json" -Destination "release/win-unpacked/resources/app/package.json" -Force
-
-      - name: Package Electron App
-        run: npx electron-builder --dir
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Package Electron App (Unpacked)
+        run: node build_unpacked.js
 
       - name: Compile Installer with Inno Setup
         shell: pwsh

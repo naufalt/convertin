@@ -12,6 +12,7 @@
   "build": {
     "appId": "com.convertin.desktop",
     "productName": "Convertin",
+    "npmRebuild": false,
     "directories": {
       "output": "release"
     },

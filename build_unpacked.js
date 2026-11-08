@@ -27,6 +27,14 @@ console.log('Copying application files into resources/app...');
 fs.cpSync(path.resolve('dist'), path.join(appDir, 'dist'), { recursive: true });
 fs.cpSync(path.resolve('dist-electron'), path.join(appDir, 'dist-electron'), { recursive: true });
 
+// Copy officeHelper.ps1 if present in electron/ into dist-electron/
+const officeHelperSrc = path.resolve('electron/officeHelper.ps1');
+const officeHelperDest = path.join(appDir, 'dist-electron', 'officeHelper.ps1');
+if (fs.existsSync(officeHelperSrc)) {
+  fs.cpSync(officeHelperSrc, officeHelperDest);
+  console.log('Copied officeHelper.ps1 to dist-electron');
+}
+
 // Copy minimal package.json
 const pkgJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 const runtimePkg = {

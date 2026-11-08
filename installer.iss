@@ -1,6 +1,6 @@
 ; Inno Setup Script for Convertin Offline Media Converter
 #define MyAppName "Convertin"
-#define MyAppVersion "2.1.1"
+#define MyAppVersion "2.1.2"
 #define MyAppPublisher "Convertin"
 #define MyAppURL "https://github.com/naufalt/convertin"
 #define MyAppExeName "Convertin.exe"

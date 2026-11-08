@@ -11,14 +11,19 @@ export interface OfficeCapabilities {
 let cachedCapabilities: OfficeCapabilities | null = null;
 
 function getScriptPath(): string {
-  const devPath = path.join(__dirname, 'officeHelper.ps1');
-  if (fs.existsSync(devPath)) return devPath;
-
+  // 1. Packed app: process.resourcesPath/app/dist-electron/officeHelper.ps1
   const appPath = path.join(process.resourcesPath || '', 'app', 'dist-electron', 'officeHelper.ps1');
   if (fs.existsSync(appPath)) return appPath;
 
-  const fallback = path.join(process.cwd(), 'electron', 'officeHelper.ps1');
-  return fallback;
+  // 2. Unpacked / dev in dist-electron directory
+  const devPath = path.join(__dirname, 'officeHelper.ps1');
+  if (fs.existsSync(devPath)) return devPath;
+
+  // 3. Fallback to electron/ directory
+  const electronPath = path.join(process.cwd(), 'electron', 'officeHelper.ps1');
+  if (fs.existsSync(electronPath)) return electronPath;
+
+  return appPath;
 }
 
 export async function checkOfficeCapabilities(): Promise<OfficeCapabilities> {

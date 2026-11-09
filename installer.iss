@@ -1,6 +1,6 @@
 ; Inno Setup Script for Convertin Offline Media Converter
 #define MyAppName "Convertin"
-#define MyAppVersion "2.1.2"
+#define MyAppVersion "2.1.3"
 #define MyAppPublisher "Convertin"
 #define MyAppURL "https://github.com/naufalt/convertin"
 #define MyAppExeName "Convertin.exe"
@@ -16,7 +16,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=release\installer
-OutputBaseFilename=Convertin-Setup-x64
+OutputBaseFilename=Convertin-Setup-v{#MyAppVersion}-x64
 SetupIconFile=resources\icons\app_tray.ico
 Compression=lzma2/ultra64
 SolidCompression=yes

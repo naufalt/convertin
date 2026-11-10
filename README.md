@@ -1,121 +1,103 @@
-# Convertin
+<div align="center">
+  <img src="docs/images/app-icon.png" width="128" height="128" alt="Convertin Logo" />
+  <h1>Convertin</h1>
+  <p><strong>Aplikasi Pengubah Format Berkas & Media 100% Gratis, Cepat, dan Sepenuhnya Offline untuk Windows</strong></p>
 
-> **100% Free & Open-Source Offline Desktop Converter**  
-> Developed by **Naufaal Muhammad** ([@naufalt](https://github.com/naufalt))
+  <p>
+    <a href="https://github.com/naufalt/convertin/releases/latest">
+      <img src="https://img.shields.io/github/v/release/naufalt/convertin?color=6366f1&style=for-the-badge&logo=github&label=Download" alt="Download Convertin" />
+    </a>
+    <a href="https://github.com/naufalt/convertin/blob/main/LICENSE">
+      <img src="https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge" alt="MIT License" />
+    </a>
+    <img src="https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue?style=for-the-badge&logo=windows" alt="Windows Support" />
+    <img src="https://img.shields.io/badge/100%25-Offline-purple?style=for-the-badge" alt="100% Offline" />
+  </p>
 
-[English](#english) | [Bahasa Indonesia](#bahasa-indonesia)
-
----
-
-<a name="english"></a>
-## English
-
-Convertin is a modern, privacy-focused offline desktop file conversion application built with Electron, React, TypeScript, and Tailwind CSS. It handles media and document conversions directly on your local machine without sending your data to any cloud service.
-
-### 🌟 Key Features
-
-- **100% Free & Offline**: Conversions run locally via embedded FFmpeg, libwebp, native PDF rendering, and vector rasterizers. No internet required, no subscriptions, zero tracking.
-- **OTA (Over-The-Air) Updates**: Seamless auto-update detection via GitHub Releases. Download and install new updates with one click.
-- **Radial Donut Menu**: Convert files instantly from Windows Explorer by selecting a file and pressing `Ctrl + Q` or `Alt + C`.
-- **System Tray Integration**: Run conversions quietly in the background with live progress in the tray tooltip and notifications upon completion.
-- **Worker Thread Architecture**: Heavy operations (e.g. multi-page vector PDF rasterization) run in dedicated background worker threads to keep the UI smooth and responsive.
-- **Real-Time Progress & Logs**: Accurate progress bar, elapsed time timer, ETA prediction, and a collapsible log drawer.
-- **Conversion History**: Easily review past conversions, file size comparisons (before & after), space saved, and timestamps.
-- **Modern Theme**: Clean Material Design 3 interface with Dark and Light mode support.
-
-### 📁 Supported Formats
-
-- **Video**: MP4, MKV, WebM, MOV, AVI, FLV, WMV, GIF
-- **Audio**: MP3, WAV, FLAC, AAC, OGG, M4A, OPUS
-- **Image**: PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG
-- **Document**: PDF to PNG, JPG, WEBP, ICO
-
-### ⌨️ Keyboard Shortcuts
-
-- `Ctrl + Q`: Open Radial Donut wheel for selected file in Windows Explorer.
-- `Alt + C`: Alternative trigger for Radial wheel.
-- `Escape`: Close Radial wheel.
-
-### 🛠️ Developer Setup
-
-```bash
-# Clone repository
-git clone https://github.com/naufalt/convertin.git
-cd convertin
-
-# Install dependencies
-npm install
-
-# Run in development mode
-npm run dev
-
-# Build unpacked app and installer
-node build_unpacked.js
-"C:\Program Files\Inno Setup 7\ISCC.exe" installer.iss
-```
+  <p>
+    <a href="https://saweria.co/naufalt">
+      <img src="https://img.shields.io/badge/🍵%20Traktir%20Matcha-Saweria-059669?style=for-the-badge" alt="Support on Saweria" />
+    </a>
+  </p>
+</div>
 
 ---
 
-<a name="bahasa-indonesia"></a>
-## Bahasa Indonesia
+## 💡 Mengapa Memilih Convertin?
 
-Convertin adalah aplikasi konversi berkas dan media desktop yang modern, cepat, dan sepenuhnya offline. Dibuat menggunakan Electron, React, TypeScript, dan Tailwind CSS, Convertin memproses semua file langsung di perangkat lokal Anda tanpa ketergantungan pada server internet maupun layanan cloud.
+Apakah Anda sering merasa ragu saat mengonversi dokumen rahasia, video, atau foto berharga ke situs web konverter online karena takut data diunggah ke internet? **Convertin dibuat untuk menyelesaikan masalah tersebut!**
 
-### 🌟 Fitur Utama
-
-- **100% Gratis & Bebas Iklan**: Semua proses konversi berjalan langsung di komputer Anda. Data pribadi Anda tetap aman dan tidak pernah diunggah ke internet.
-- **Fitur Update Otomatis (OTA)**: Mendeteksi versi terbaru langsung dari GitHub Releases. Pengguna dapat mengunduh dan memperbarui aplikasi secara otomatis hanya dengan satu klik.
-- **Menu Cepat Donut Radial**: Ubah format file langsung dari Windows Explorer tanpa perlu membuka jendela utama, cukup pilih file dan tekan `Ctrl + Q` atau `Alt + C`.
-- **Integrasi System Tray**: Konversi dapat berjalan di latar belakang (tray) dengan tooltip persentase realtime dan notifikasi ketika selesai.
-- **Performa Responsif (Worker Thread)**: Proses berat seperti render PDF multi-halaman berukuran besar dijalankan pada thread terpisah, sehingga aplikasi tetap lancar tanpa *Not Responding*.
-- **Estimasi Waktu & Log Realtime**: Dilengkapi durasi proses berjalan, estimasi selesai (ETA), dan drawer log teknis untuk melihat detail konversi.
-- **Riwayat Konversi (History)**: Menampilkan daftar file yang sudah selesai dikonversi, perbandingan ukuran sebelum & sesudah, serta waktu prosesnya.
-- **Tampilan Elegan**: Mengadopsi desain Material Design 3 dengan pilihan tema Gelap (Dark Mode) dan Terang (Light Mode).
-
-### 📁 Format yang Didukung
-
-- **Video**: MP4, MKV, WebM, MOV, AVI, FLV, WMV, GIF
-- **Audio**: MP3, WAV, FLAC, AAC, OGG, M4A, OPUS
-- **Gambar**: PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG
-- **Dokumen**: PDF ke PNG, JPG, WEBP, ICO
-
-### ⌨️ Pintasan Tombol (Shortcuts)
-
-- `Ctrl + Q`: Membuka menu radial cepat untuk file yang dipilih di Explorer.
-- `Alt + C`: Pintasan alternatif menu radial.
-- `Escape`: Menutup menu radial.
+Convertin adalah aplikasi desktop Windows yang bekerja **100% secara lokal** di laptop atau PC Anda. Tanpa koneksi internet, tanpa kuota terbuang, tanpa iklan, dan privasi Anda terjamin 100% aman karena berkas Anda tidak pernah meninggalkan komputer Anda.
 
 ---
 
-## 👨‍💻 Developer
+## 📸 Tampilan Antarmuka (Screenshots)
 
-Dibuat dan dikembangkan oleh **Naufaal Muhammad**  
-GitHub: [@naufalt](https://github.com/naufalt)
+<div align="center">
+  <h3>✨ Antarmuka Modern, Bersih & Ramah Mata (Soft Light & Dark Mode)</h3>
+  <img src="docs/images/screenshot-main.png" alt="Tampilan Antarmuka Convertin" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <br /><br />
+  <h3>⚡ Konversi Kilat Langsung dari Windows Explorer (Shortcut Ctrl + Q)</h3>
+  <img src="docs/images/screenshot-radial.png" alt="Shortcut Radial Menu Ctrl+Q" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+</div>
 
 ---
 
-## 📄 Licenses & Third-Party Credits
+## 🌟 Fitur Utama untuk Anda
 
-Convertin is distributed under the **[MIT License](LICENSE)**:
-- Copyright (c) 2026 Naufaal Muhammad.
-- You are free to use, copy, modify, merge, publish, and distribute this software for personal or commercial purposes.
+* **🔒 100% Offline & Privasi Terjaga:** Semua proses berjalan di komputer sendiri. Aman untuk dokumen kantor, tugas kuliah, dan foto/video pribadi.
+* **⚡ Konversi Seketika dengan `Ctrl + Q`:** Cukup klik berkas apa saja di Windows Explorer, tekan `Ctrl + Q`, pilih format tujuan pada menu donat yang muncul, dan selesai! Tidak perlu repot buka aplikasi dulu.
+* **📂 Konversi Massal (Batch Mode):** Punya 50 foto atau video sekaligus? Tinggal tarik & lepas (*drag and drop*), pilih format target dalam satu klik, lalu proses sekaligus.
+* **🖥️ Akselerasi Hardware (GPU):** Mendukung kartu grafis NVIDIA (NVENC) dan multi-core prosesor modern agar konversi video resolusi tinggi berjalan sangat cepat.
+* **🔎 Riwayat & Pencarian Berkas:** Tersedia tab Riwayat yang rapi dilengkapi kolom pencarian dan pembagian halaman (*pagination*), lengkap dengan selisih ukuran berkas sebelum dan sesudah konversi.
+* **🌐 Dukungan Multi-Bahasa:** Tersedia dalam **Bahasa Indonesia** dan **English**.
+* **🌙 Tampilan Lembut (Eye-Friendly):** Mode Terang yang tidak silau dan Mode Gelap yang nyaman untuk bekerja di malam hari.
+* **🔄 Pembaruan Otomatis (OTA Update):** Notifikasi pembaruan aplikasi langsung dari dalam aplikasi dengan satu klik pasang.
+* **🏪 Segera Hadir di Microsoft Store:** Sedang dalam proses rilis resmi di Windows Store.
 
-### Third-Party Open Source Libraries & Components:
+---
 
-This application bundles and makes use of the following open-source software:
+## 📁 Beragam Format yang Didukung
 
-- **[FFmpeg](https://ffmpeg.org/)**  
-  Licensed under [LGPL v2.1+ / GPL v3+](https://www.gnu.org/licenses/). FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
-- **[Electron](https://github.com/electron/electron)**  
-  Licensed under the [MIT License](https://github.com/electron/electron/blob/main/LICENSE). Copyright (c) Electron contributors.
-- **[PDF.js (pdfjs-dist)](https://github.com/mozilla/pdf.js)**  
-  Licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Copyright (c) Mozilla Foundation.
-- **[@resvg/resvg-js](https://github.com/yisibl/resvg-js)**  
-  Licensed under the [MPL-2.0 License](https://www.mozilla.org/en-US/MPL/2.0/). High-performance SVG renderer.
-- **[@napi-rs/canvas](https://github.com/Brooooooklyn/canvas)**  
-  Licensed under the [MIT License](https://github.com/Brooooooklyn/canvas/blob/main/LICENSE).
-- **[pdf-lib](https://github.com/Hopding/pdf-lib)**  
-  Licensed under the [MIT License](https://github.com/Hopding/pdf-lib/blob/master/LICENSE.md).
-- **[Lucide Icons](https://lucide.dev/)**  
-  Licensed under the [ISC License](https://lucide.dev/license).
+| Kategori | Format yang Didukung |
+| :--- | :--- |
+| **🎬 Video** | MP4, MKV, MOV, WebM, AVI, GIF Animasi |
+| **🎵 Audio** | MP3, WAV, FLAC, AAC, OGG, M4A, Ekstraksi Audio dari Video |
+| **🖼️ Gambar** | PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG Vektor |
+| **📄 Dokumen & Office** | Word (DOCX), Excel (XLSX), PowerPoint (PPTX) ke PDF, dan PDF ke Gambar/Dokumen |
 
+---
+
+## 🚀 Cara Mulai Menggunakan
+
+1. **Unduh Installer:** Unduh berkas instalasi terbaru di halaman [GitHub Releases](https://github.com/naufalt/convertin/releases/latest) (pilih `Convertin-Setup-v3.0.0-x64.exe`).
+2. **Pasang di Komputer:** Buka installer dan ikuti petunjuk pemasangan (secara default akan terpasang rapi di `Program Files`).
+3. **Mulai Konversi:**
+   * **Cara 1:** Buka aplikasi Convertin, tarik berkas Anda ke area konversi, pilih format, lalu klik **Mulai Konversi**.
+   * **Cara 2 (Paling Cepat):** Di folder mana saja di komputer Anda, klik berkas yang ingin diubah, tekan keyboard **`Ctrl + Q`**, dan klik format yang diinginkan!
+
+---
+
+## ⌨️ Pintasan Tombol Berguna
+
+* **`Ctrl + Q`** atau **`Alt + C`**: Menampilkan menu cepat Radial tepat di posisi kursor mouse Anda di Windows Explorer.
+* **`Esc`**: Menutup menu cepat kapan saja.
+
+---
+
+## 💚 Dukung Pengembang (Buy Me a Matcha)
+
+Convertin adalah proyek independen dan sumber terbuka (*open-source*) yang dirancang untuk membantu produktivitas masyarakat secara cuma-cuma tanpa iklan yang mengganggu.
+
+Jika Convertin bermanfaat mempermudah pekerjaan atau tugas sehari-hari Anda, Anda dapat memberikan apresiasi dan traktir secangkir Matcha hangat untuk pengembang melalui:
+
+👉 **[Traktir Matcha di Saweria (saweria.co/naufalt)](https://saweria.co/naufalt)** 🍵
+
+Dukungan Anda sangat berarti untuk pemeliharaan server, pembaruan fitur, dan pengembangan aplikasi bermanfaat lainnya!
+
+---
+
+## 👨‍💻 Pengembang & Lisensi
+
+* Dikembangkan dengan sepenuh hati oleh **Naufaal Muhammad** ([@naufalt](https://github.com/naufalt)).
+* Proyek ini 100% sumber terbuka (*open-source*) di bawah naungan [Lisensi MIT](LICENSE). Bebas digunakan untuk keperluan pribadi maupun profesional.

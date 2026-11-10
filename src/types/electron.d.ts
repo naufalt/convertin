@@ -5,6 +5,8 @@ export interface ElectronAPI {
   selectFolder: () => Promise<string | null>;
   getSystemCapabilities: () => Promise<any>;
   getTelemetryStats: () => Promise<TelemetryStats>;
+  getStartupEnabled?: () => Promise<boolean>;
+  setStartupEnabled?: (enabled: boolean) => Promise<{ success: boolean; enabled?: boolean; error?: string }>;
   probeFile: (filePath: string) => Promise<any>;
   startConversion: (payload: {
     id: string;

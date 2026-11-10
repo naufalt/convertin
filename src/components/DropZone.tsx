@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
-import {
-  Upload,
-  FolderOpen,
-  FileText,
-  Video,
-  Music,
-  Image as ImageIcon,
-  ShieldCheck,
-  Zap,
-  ArrowRight
-} from 'lucide-react';
+import { FolderOpen, Plus, BookOpen, AlertCircle } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
-import { APP_ICON_BASE64 } from '../assets/appIconBase64';
 
 export const DropZone: React.FC = () => {
   const [isDragOver, setIsDragOver] = useState(false);
   const addFiles = useAppStore((state) => state.addFiles);
+  const setActiveTab = useAppStore((state) => state.setActiveTab);
+  const t = useAppStore((state) => state.t());
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -68,110 +59,64 @@ export const DropZone: React.FC = () => {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`h-full flex flex-col justify-between p-8 rounded-3xl transition-all duration-200 border ${
+      onClick={handleBrowseFiles}
+      className={`h-full flex flex-col items-center justify-center p-8 rounded-2xl cursor-pointer transition-all duration-200 border border-dashed relative ${
         isDragOver
-          ? 'dark:bg-md-darkPrimaryContainer/20 bg-md-primaryContainer/30 border-2 border-md-primary dark:border-md-darkPrimary'
-          : 'dark:bg-[#181622] bg-white border-black/5 dark:border-white/5 shadow-sm'
+          ? 'dark:bg-indigo-500/10 bg-indigo-500/10 border-indigo-500 dark:border-indigo-400'
+          : 'dark:bg-[#13151C] bg-[#F8FAFC] dark:border-slate-800 border-slate-300/90 hover:dark:border-indigo-500/40 hover:border-indigo-400/70 shadow-sm'
       }`}
     >
-      {/* Top Engine Banner */}
-      <div className="flex items-center justify-between pb-4 border-b dark:border-white/5 border-black/5">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-emerald-500" />
-          <span className="text-xs font-semibold uppercase tracking-wider dark:text-zinc-300 text-zinc-700">
-            Offline Engine Active
-          </span>
-        </div>
-
-        <div className="text-[11px] font-mono dark:text-zinc-400 text-zinc-500 flex items-center gap-1.5">
-          <Zap className="w-3.5 h-3.5 text-amber-500" />
-          <span>GPU NVENC & CPU Workers</span>
-        </div>
-      </div>
-
-      {/* Center Clean Action Area */}
-      <div className="flex flex-col items-center max-w-md mx-auto text-center my-auto py-6">
-        {/* Prominent App Icon */}
+      <div className="flex flex-col items-center max-w-md text-center">
+        {/* Clean Minimal Icon Button with Indigo Accent */}
         <div
-          onClick={handleBrowseFiles}
-          className="cursor-pointer mb-5 p-2 rounded-3xl dark:bg-white/5 bg-zinc-100 border dark:border-white/10 border-black/5 shadow-sm hover:scale-105 active:scale-95 transition-transform"
-          title="Click to browse files"
+          className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-colors border ${
+            isDragOver
+              ? 'bg-indigo-600 text-white border-indigo-500'
+              : 'dark:bg-indigo-500/15 bg-indigo-500/10 dark:text-indigo-400 text-indigo-600 dark:border-indigo-500/30 border-indigo-200'
+          }`}
         >
-          <img
-            src={APP_ICON_BASE64}
-            alt="Convertin"
-            className="w-20 h-20 object-contain drop-shadow"
-          />
+          <Plus className="w-6 h-6" />
         </div>
 
-        <h3 className="text-xl font-bold dark:text-white text-zinc-900 mb-2 tracking-tight">
-          Drop files to start converting
+        <h3 className="text-base font-semibold dark:text-slate-100 text-slate-800 mb-1 tracking-tight">
+          {t.dropTitle}
         </h3>
-        <p className="text-xs dark:text-zinc-400 text-zinc-600 mb-6 leading-relaxed max-w-sm">
-          Convert video, audio, image, and office documents (Word, PowerPoint, Excel, PDF) safely without internet connection.
+        <p className="text-xs dark:text-slate-400 text-slate-500 mb-5 leading-relaxed">
+          {t.dropSubtitle}
         </p>
 
         <button
-          onClick={handleBrowseFiles}
-          className="flex items-center gap-2 px-8 py-3 rounded-2xl dark:bg-md-darkPrimary bg-md-primary dark:text-md-darkOnPrimary text-md-onPrimary font-semibold text-xs shadow hover:shadow-md hover:brightness-105 active:scale-95 transition-all"
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleBrowseFiles();
+          }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs active:scale-[0.98] transition-all shadow-sm"
         >
-          <FolderOpen className="w-4 h-4" />
-          <span>Browse Files</span>
+          <FolderOpen className="w-3.5 h-3.5" />
+          <span>{t.selectFiles}</span>
         </button>
 
-        <span className="mt-6 text-[11px] font-mono dark:text-zinc-500 text-zinc-400">
-          Explorer shortcut: Select files and press <kbd className="px-1.5 py-0.5 rounded dark:bg-white/10 bg-black/5 font-semibold text-md-primary dark:text-md-darkPrimary">Ctrl+Q</kbd>
-        </span>
-      </div>
-
-      {/* Bottom Clean Utility Shelf (CleanMyMac & 3uTools style) */}
-      <div className="grid grid-cols-4 gap-3 pt-4 border-t dark:border-white/5 border-black/5">
-        <div className="p-3 rounded-2xl dark:bg-white/[0.03] bg-zinc-50 border dark:border-white/5 border-black/5">
-          <div className="flex items-center gap-2 mb-1">
-            <FileText className="w-4 h-4 text-blue-500" />
-            <span className="text-xs font-semibold dark:text-zinc-200 text-zinc-800">
-              Office Documents
-            </span>
-          </div>
-          <p className="text-[11px] font-mono dark:text-zinc-400 text-zinc-500">
-            DOCX, PPTX, XLSX to PDF
-          </p>
+        {/* Tip Explorer Shortcut */}
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveTab('tutorial');
+          }}
+          className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl dark:bg-slate-900/80 bg-[#E8EEF5] border dark:border-slate-800 border-slate-300/70 text-[11px] dark:text-slate-400 text-slate-600 hover:dark:text-indigo-300 hover:text-indigo-600 transition-colors"
+        >
+          <BookOpen className="w-3.5 h-3.5 text-indigo-500" />
+          <span>{t.tipExplorer}</span>
+          <kbd className="px-1.5 py-0.5 rounded font-mono text-[10px] dark:bg-slate-800 bg-[#F8FAFC] dark:text-indigo-300 text-indigo-600 border dark:border-slate-700 border-slate-300 font-semibold">
+            Ctrl+Q
+          </kbd>
+          <span>{t.inExplorer}</span>
         </div>
 
-        <div className="p-3 rounded-2xl dark:bg-white/[0.03] bg-zinc-50 border dark:border-white/5 border-black/5">
-          <div className="flex items-center gap-2 mb-1">
-            <Video className="w-4 h-4 text-purple-500" />
-            <span className="text-xs font-semibold dark:text-zinc-200 text-zinc-800">
-              Video Converter
-            </span>
-          </div>
-          <p className="text-[11px] font-mono dark:text-zinc-400 text-zinc-500">
-            MP4, MKV, MOV, WebM, GIF
-          </p>
-        </div>
-
-        <div className="p-3 rounded-2xl dark:bg-white/[0.03] bg-zinc-50 border dark:border-white/5 border-black/5">
-          <div className="flex items-center gap-2 mb-1">
-            <ImageIcon className="w-4 h-4 text-emerald-500" />
-            <span className="text-xs font-semibold dark:text-zinc-200 text-zinc-800">
-              Images & Vector
-            </span>
-          </div>
-          <p className="text-[11px] font-mono dark:text-zinc-400 text-zinc-500">
-            WEBP, AVIF, PNG, JPG, SVG
-          </p>
-        </div>
-
-        <div className="p-3 rounded-2xl dark:bg-white/[0.03] bg-zinc-50 border dark:border-white/5 border-black/5">
-          <div className="flex items-center gap-2 mb-1">
-            <Music className="w-4 h-4 text-amber-500" />
-            <span className="text-xs font-semibold dark:text-zinc-200 text-zinc-800">
-              Audio & Extraction
-            </span>
-          </div>
-          <p className="text-[11px] font-mono dark:text-zinc-400 text-zinc-500">
-            MP3, WAV, FLAC, AAC, OGG
-          </p>
+        {/* Notice: Hardware Specs Impact on Conversion Speed */}
+        <div className="mt-4 px-3.5 py-2 rounded-xl dark:bg-slate-900/40 bg-slate-200/50 border dark:border-slate-800/60 border-slate-300/60 text-[11px] leading-relaxed dark:text-slate-400 text-slate-600 text-center flex items-center gap-2">
+          <AlertCircle className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+          <span>{t.specNotice}</span>
         </div>
       </div>
     </div>

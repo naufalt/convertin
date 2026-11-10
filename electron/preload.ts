@@ -13,6 +13,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   selectFolder: () => ipcRenderer.invoke('dialog:selectFolder'),
   getSystemCapabilities: () => ipcRenderer.invoke('system:getCapabilities'),
   getTelemetryStats: () => ipcRenderer.invoke('system:getTelemetryStats'),
+  getStartupEnabled: () => ipcRenderer.invoke('system:getStartupEnabled'),
+  setStartupEnabled: (enabled: boolean) => ipcRenderer.invoke('system:setStartupEnabled', enabled),
   probeFile: (filePath: string) => ipcRenderer.invoke('media:probe', filePath),
   startConversion: (payload: any) => ipcRenderer.invoke('media:convert', payload),
   cancelConversion: (id: string) => ipcRenderer.invoke('media:cancel', id),

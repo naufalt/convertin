@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { QueueItem, Settings, SystemCapabilities, LogEntry } from '../types';
 import { detectMediaType, getDefaultTargetFormat } from '../utils/matrix';
+import { Language, translations } from '../utils/i18n';
 
 interface AppState {
   queue: QueueItem[];
@@ -8,14 +9,20 @@ interface AppState {
   system: SystemCapabilities;
   isProcessing: boolean;
   theme: 'dark' | 'light';
+  language: Language;
   logs: LogEntry[];
   showLogs: boolean;
-  activeTab: 'convert' | 'history';
+  activeTab: 'convert' | 'history' | 'tutorial' | 'system' | 'settings';
+  sidebarCollapsed: boolean;
   
   // Actions
+  toggleSidebar: () => void;
+  setSidebarCollapsed: (collapsed: boolean) => void;
   toggleTheme: () => void;
   setTheme: (t: 'dark' | 'light') => void;
-  setActiveTab: (tab: 'convert' | 'history') => void;
+  setLanguage: (lang: Language) => void;
+  t: () => typeof translations['id'];
+  setActiveTab: (tab: 'convert' | 'history' | 'tutorial' | 'system' | 'settings') => void;
   toggleShowLogs: () => void;
   addLog: (level: LogEntry['level'], message: string) => void;
   clearLogs: () => void;
@@ -41,16 +48,31 @@ interface AppState {
 export const useAppStore = create<AppState>((set, get) => ({
   queue: [],
   theme: 'dark',
+  language: 'id',
   logs: [
     {
       id: 'init-1',
       timestamp: new Date().toLocaleTimeString(),
       level: 'info',
-      message: 'Convertin v2.0 Engine initialized. Ready for conversion.',
+      message: 'Convertin Engine initialized. Ready for conversion.',
     },
   ],
   showLogs: false,
   activeTab: 'convert',
+  sidebarCollapsed: false,
+
+  toggleSidebar: () => set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+  setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
+
+  setLanguage: (lang) => {
+    localStorage.setItem('convertin_lang', lang);
+    set({ language: lang });
+  },
+
+  t: () => {
+    const lang = get().language;
+    return translations[lang] || translations.id;
+  },
 
   setActiveTab: (tab) => set({ activeTab: tab }),
   settings: {

@@ -123,8 +123,10 @@ function createMainWindow() {
     minHeight: 560,
     frame: false,
     resizable: true,
+    movable: true,
+    maximizable: true,
     icon: appIcon,
-    backgroundColor: currentAppTheme === 'dark' ? '#141218' : '#FEF7FF',
+    backgroundColor: currentAppTheme === 'dark' ? '#0C0D12' : '#EEF1F6',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -146,8 +148,33 @@ function createMainWindow() {
     if (!isQuitting) {
       event.preventDefault();
       mainWindow?.hide();
+      showTrayNotification();
     }
   });
+}
+
+let lastTrayNotifTime = 0;
+function showTrayNotification() {
+  const now = Date.now();
+  if (now - lastTrayNotifTime < 10000) return; // Debounce so user isn't spammed
+  lastTrayNotifTime = now;
+
+  try {
+    if (Notification.isSupported()) {
+      const notif = new Notification({
+        title: 'Convertin Berjalan di Latar Belakang',
+        body: 'Aplikasi diminimalkan ke System Tray. Gunakan shortcut Ctrl+Q di File Explorer untuk konversi cepat kapan saja.',
+        icon: getAppTrayIcon(),
+      });
+      notif.on('click', () => {
+        mainWindow?.show();
+        mainWindow?.focus();
+      });
+      notif.show();
+    }
+  } catch (err) {
+    console.error('[TrayNotifError]', err);
+  }
 }
 
 function createRadialWindow() {
@@ -423,6 +450,7 @@ app.on('will-quit', () => {
 
 ipcMain.on('window:minimize', () => {
   mainWindow?.hide();
+  showTrayNotification();
 });
 
 ipcMain.on('window:maximize', () => {
@@ -435,6 +463,7 @@ ipcMain.on('window:maximize', () => {
 
 ipcMain.on('window:close', () => {
   mainWindow?.hide();
+  showTrayNotification();
 });
 
 ipcMain.on('radial:close', () => {
@@ -444,7 +473,28 @@ ipcMain.on('radial:close', () => {
 ipcMain.on('app:theme-changed', (_event, theme: 'dark' | 'light') => {
   currentAppTheme = theme;
   if (mainWindow) {
-    mainWindow.setBackgroundColor(theme === 'dark' ? '#141218' : '#FEF7FF');
+    mainWindow.setBackgroundColor(theme === 'dark' ? '#0C0D12' : '#EEF1F6');
+  }
+});
+
+ipcMain.handle('system:getStartupEnabled', () => {
+  try {
+    const settings = app.getLoginItemSettings();
+    return !!settings.openAtLogin;
+  } catch {
+    return false;
+  }
+});
+
+ipcMain.handle('system:setStartupEnabled', (_event, enabled: boolean) => {
+  try {
+    app.setLoginItemSettings({
+      openAtLogin: enabled,
+      openAsHidden: false,
+    });
+    return { success: true, enabled };
+  } catch (err: any) {
+    return { success: false, error: err?.message };
   }
 });
 
@@ -579,7 +629,11 @@ ipcMain.handle('media:cancel', async (_event, id: string) => {
 });
 
 ipcMain.handle('shell:openPath', async (_event, targetPath: string) => {
-  await shell.openPath(targetPath);
+  if (/^https?:\/\//i.test(targetPath)) {
+    await shell.openExternal(targetPath);
+  } else {
+    await shell.openPath(targetPath);
+  }
 });
 
 ipcMain.handle('shell:showItemInFolder', async (_event, targetPath: string) => {

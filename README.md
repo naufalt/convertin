@@ -5,7 +5,7 @@
 
   <p>
     <a href="https://github.com/naufalt/convertin/releases/latest">
-      <img src="https://img.shields.io/github/v/release/naufalt/convertin?color=6366f1&style=for-the-badge&logo=github&label=Download" alt="Download Convertin" />
+      <img src="https://img.shields.io/github/v/release/naufalt/convertin?color=6366f1&style=for-the-badge&logo=github&label=Download%20v3.0.0" alt="Download Convertin" />
     </a>
     <a href="https://github.com/naufalt/convertin/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge" alt="MIT License" />
@@ -25,35 +25,43 @@
 
 ## 💡 Mengapa Memilih Convertin?
 
-Apakah Anda sering merasa ragu saat mengonversi dokumen rahasia, video, atau foto berharga ke situs web konverter online karena takut data diunggah ke internet? **Convertin dibuat untuk menyelesaikan masalah tersebut!**
+Sering merasa khawatir saat mengonversi dokumen rahasia, video, atau foto penting ke website konverter online karena takut data bocor atau diunggah ke cloud? **Convertin adalah solusinya!**
 
-Convertin adalah aplikasi desktop Windows yang bekerja **100% secara lokal** di laptop atau PC Anda. Tanpa koneksi internet, tanpa kuota terbuang, tanpa iklan, dan privasi Anda terjamin 100% aman karena berkas Anda tidak pernah meninggalkan komputer Anda.
+Convertin adalah aplikasi desktop Windows yang memproses semua berkas **100% secara lokal** di komputer Anda. Tanpa koneksi internet, tanpa batasan ukuran file, tanpa iklan, dan privasi Anda terjamin 100% aman karena berkas tidak pernah dikirim ke mana pun.
 
 ---
 
-## 📸 Tampilan Antarmuka (Screenshots)
+## 📸 Tampilan Antarmuka Asli (Screenshots v3.0.0)
 
 <div align="center">
-  <h3>✨ Antarmuka Modern, Bersih & Ramah Mata (Soft Light & Dark Mode)</h3>
-  <img src="docs/images/screenshot-main.png" alt="Tampilan Antarmuka Convertin" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
-  <br /><br />
-  <h3>⚡ Konversi Kilat Langsung dari Windows Explorer (Shortcut Ctrl + Q)</h3>
-  <img src="docs/images/screenshot-radial.png" alt="Shortcut Radial Menu Ctrl+Q" width="85%" style="border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);" />
+  <h3>✨ 1. Halaman Utama — Bersih, Elegan & Ramah Mata</h3>
+  <p>Tersedia info tips spesifikasi perangkat, drag and drop instan, quick switch bahasa, dan status offline.</p>
+  <img src="docs/images/convertin-v3-home.png" alt="Tampilan Halaman Utama Convertin v3" width="90%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);" />
+  <br /><br /><br />
+
+  <h3>⚡ 2. Pintasan Roda Radial (Ctrl + Q) Langsung di Windows Explorer</h3>
+  <p>Ubah format seketika tanpa membuka aplikasi. Klik file apa saja di Explorer lalu tekan <code>Ctrl + Q</code>.</p>
+  <img src="docs/images/convertin-v3-radial.png" alt="Pintasan Roda Radial Ctrl+Q di Windows Explorer" width="55%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);" />
+  <br /><br /><br />
+
+  <h3>📊 3. Antrean Konversi Cerdas (Smart Conversion Queue)</h3>
+  <p>Menampilkan status proses, selisih ukuran hasil konversi, serta counter antrean aktif yang akurat.</p>
+  <img src="docs/images/convertin-v3-queue.png" alt="Antrean Konversi Convertin" width="90%" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);" />
 </div>
 
 ---
 
-## 🌟 Fitur Utama untuk Anda
+## 🌟 Fitur Unggulan
 
-* **🔒 100% Offline & Privasi Terjaga:** Semua proses berjalan di komputer sendiri. Aman untuk dokumen kantor, tugas kuliah, dan foto/video pribadi.
-* **⚡ Konversi Seketika dengan `Ctrl + Q`:** Cukup klik berkas apa saja di Windows Explorer, tekan `Ctrl + Q`, pilih format tujuan pada menu donat yang muncul, dan selesai! Tidak perlu repot buka aplikasi dulu.
-* **📂 Konversi Massal (Batch Mode):** Punya 50 foto atau video sekaligus? Tinggal tarik & lepas (*drag and drop*), pilih format target dalam satu klik, lalu proses sekaligus.
-* **🖥️ Akselerasi Hardware (GPU):** Mendukung kartu grafis NVIDIA (NVENC) dan multi-core prosesor modern agar konversi video resolusi tinggi berjalan sangat cepat.
-* **🔎 Riwayat & Pencarian Berkas:** Tersedia tab Riwayat yang rapi dilengkapi kolom pencarian dan pembagian halaman (*pagination*), lengkap dengan selisih ukuran berkas sebelum dan sesudah konversi.
-* **🌐 Dukungan Multi-Bahasa:** Tersedia dalam **Bahasa Indonesia** dan **English**.
-* **🌙 Tampilan Lembut (Eye-Friendly):** Mode Terang yang tidak silau dan Mode Gelap yang nyaman untuk bekerja di malam hari.
-* **🔄 Pembaruan Otomatis (OTA Update):** Notifikasi pembaruan aplikasi langsung dari dalam aplikasi dengan satu klik pasang.
-* **🏪 Segera Hadir di Microsoft Store:** Sedang dalam proses rilis resmi di Windows Store.
+* **🔒 100% Offline & Privasi Terjaga:** Bekerja mandiri tanpa koneksi internet. Sangat aman untuk dokumen perusahaan, tugas kampus, dan foto pribadi.
+* **⚡ Menu Donut Radial (`Ctrl + Q`):** Buka Windows Explorer, klik berkas Anda, tekan `Ctrl + Q`, lalu klik format target. File langsung terkonversi otomatis di folder yang sama!
+* **📂 Konversi Banyak Berkas Sekaligus (Batch):** Seret puluhan file sekaligus dan ubah semua ke format target hanya dengan satu klik.
+* **🖥️ Akselerasi Hardware GPU:** Mendukung GPU NVIDIA (NVENC) serta multi-core processor untuk proses transcode video dan gambar beresolusi tinggi yang super cepat.
+* **🔎 Riwayat Konversi & Pencarian Cepat:** Dilengkapi fitur pencarian nama file, pagination, serta perbandingan ukuran file sebelum vs sesudah konversi.
+* **📐 Sidebar Interaktif:** Sidebar navigasi modern yang bisa diperlebar (*expand*) atau diperkecil (*minimize*) dengan animasi transisi yang halus.
+* **🌐 Pilihan Bahasa:** Mendukung Bahasa Indonesia dan English yang bisa diganti kapan saja secara instan.
+* **🔄 Pembaruan Otomatis (OTA):** Notifikasi update langsung di dalam aplikasi saat versi baru tersedia di GitHub.
+* **🏪 Segera Hadir di Microsoft Store:** Sedang dalam tahap rilis resmi di Windows Store.
 
 ---
 
@@ -68,36 +76,36 @@ Convertin adalah aplikasi desktop Windows yang bekerja **100% secara lokal** di 
 
 ---
 
-## 🚀 Cara Mulai Menggunakan
+## 🚀 Cara Mudah Menggunakan
 
-1. **Unduh Installer:** Unduh berkas instalasi terbaru di halaman [GitHub Releases](https://github.com/naufalt/convertin/releases/latest) (pilih `Convertin-Setup-v3.0.0-x64.exe`).
-2. **Pasang di Komputer:** Buka installer dan ikuti petunjuk pemasangan (secara default akan terpasang rapi di `Program Files`).
+1. **Unduh Installer:** Unduh berkas instalasi terbaru di [GitHub Releases](https://github.com/naufalt/convertin/releases/latest) (pilih `Convertin-Setup-v3.0.0-x64.exe`).
+2. **Pasang di Komputer:** Buka installer dan tentukan folder instalasi yang Anda inginkan (secara bawaan terpasang rapi di `Program Files`).
 3. **Mulai Konversi:**
-   * **Cara 1:** Buka aplikasi Convertin, tarik berkas Anda ke area konversi, pilih format, lalu klik **Mulai Konversi**.
-   * **Cara 2 (Paling Cepat):** Di folder mana saja di komputer Anda, klik berkas yang ingin diubah, tekan keyboard **`Ctrl + Q`**, dan klik format yang diinginkan!
+   * **Cara 1 (Di Aplikasi):** Buka Convertin, tarik berkas Anda ke layar, pilih format, lalu klik **Mulai Konversi**.
+   * **Cara 2 (Paling Cepat):** Di folder mana saja di komputer Anda, klik berkas yang ingin diubah, tekan keyboard **`Ctrl + Q`**, dan klik format tujuan pada roda yang muncul!
 
 ---
 
-## ⌨️ Pintasan Tombol Berguna
+## ⌨️ Pintasan Tombol Pintar
 
-* **`Ctrl + Q`** atau **`Alt + C`**: Menampilkan menu cepat Radial tepat di posisi kursor mouse Anda di Windows Explorer.
-* **`Esc`**: Menutup menu cepat kapan saja.
+* **`Ctrl + Q`** atau **`Alt + C`**: Memunculkan roda konversi instan di posisi kursor mouse Anda pada Windows Explorer.
+* **`Esc`**: Menutup roda konversi.
 
 ---
 
 ## 💚 Dukung Pengembang (Buy Me a Matcha)
 
-Convertin adalah proyek independen dan sumber terbuka (*open-source*) yang dirancang untuk membantu produktivitas masyarakat secara cuma-cuma tanpa iklan yang mengganggu.
+Convertin adalah proyek independen dan sumber terbuka (*open-source*) yang dibuat gratis tanpa iklan untuk membantu produktivitas sehari-hari.
 
-Jika Convertin bermanfaat mempermudah pekerjaan atau tugas sehari-hari Anda, Anda dapat memberikan apresiasi dan traktir secangkir Matcha hangat untuk pengembang melalui:
+Jika Convertin membantu mempermudah pekerjaan atau tugas Anda, Anda dapat memberikan apresiasi dan mentraktir secangkir Matcha hangat untuk pengembang melalui:
 
 👉 **[Traktir Matcha di Saweria (saweria.co/naufalt)](https://saweria.co/naufalt)** 🍵
 
-Dukungan Anda sangat berarti untuk pemeliharaan server, pembaruan fitur, dan pengembangan aplikasi bermanfaat lainnya!
+Apresiasi Anda sangat berharga untuk terus merawat dan mengembangkan fitur-fitur baru di Convertin!
 
 ---
 
 ## 👨‍💻 Pengembang & Lisensi
 
-* Dikembangkan dengan sepenuh hati oleh **Naufaal Muhammad** ([@naufalt](https://github.com/naufalt)).
-* Proyek ini 100% sumber terbuka (*open-source*) di bawah naungan [Lisensi MIT](LICENSE). Bebas digunakan untuk keperluan pribadi maupun profesional.
+* Dibuat dan dikembangkan oleh **Naufaal Muhammad** ([@naufalt](https://github.com/naufalt)).
+* Proyek ini 100% sumber terbuka di bawah naungan [Lisensi MIT](LICENSE). Bebas digunakan untuk keperluan pribadi maupun komersial.

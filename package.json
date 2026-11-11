@@ -7,11 +7,12 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "package": "tsc && vite build && electron-builder --dir",
+    "package:appx": "tsc && vite build && electron-builder --win appx",
     "preview": "vite preview"
   },
   "build": {
-    "appId": "com.convertin.desktop",
-    "productName": "Convertin",
+    "appId": "Ngoods.ConvertIn",
+    "productName": "ConvertIn",
     "npmRebuild": false,
     "directories": {
       "output": "release"
@@ -36,6 +37,13 @@
     "win": {
       "target": "dir",
       "icon": "resources/icons/app_tray.ico"
+    },
+    "appx": {
+      "identityName": "Ngoods.ConvertIn",
+      "publisher": "CN=A92523C4-5EF5-4F58-85A8-408E3D78A880",
+      "publisherDisplayName": "Ngoods",
+      "applicationId": "Ngoods.ConvertIn",
+      "backgroundColor": "#11131A"
     }
   },
   "dependencies": {

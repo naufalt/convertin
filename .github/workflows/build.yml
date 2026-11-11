@@ -61,6 +61,9 @@ jobs:
       - name: Package Electron App (Unpacked)
         run: node build_unpacked.js
 
+      - name: Build MSIX / APPX Package for Microsoft Store
+        run: npx electron-builder --win appx
+
       - name: Compile Installer with Inno Setup
         shell: pwsh
         run: |
@@ -73,11 +76,19 @@ jobs:
           name: Convertin-Setup-Installer
           path: release/installer/Convertin-Setup-*.exe
 
+      - name: Upload Store MSIX Package Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Convertin-Store-MSIX
+          path: release/*.appx
+
       - name: Create GitHub Release & Upload Asset
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: release/installer/Convertin-Setup-*.exe
+          files: |
+            release/installer/Convertin-Setup-*.exe
+            release/*.appx
           name: Convertin ${{ github.ref_name }}
           draft: false
           prerelease: false

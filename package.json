@@ -2,6 +2,7 @@
   "name": "convertin",
   "version": "3.0.0",
   "description": "Convertin // Offline Media & File Converter",
+  "author": "Ngoods",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "vite",
@@ -42,7 +43,7 @@
       "identityName": "Ngoods.ConvertIn",
       "publisher": "CN=A92523C4-5EF5-4F58-85A8-408E3D78A880",
       "publisherDisplayName": "Ngoods",
-      "applicationId": "Ngoods.ConvertIn",
+      "applicationId": "ConvertIn",
       "backgroundColor": "#11131A"
     }
   },

@@ -32,7 +32,7 @@ export const Titlebar: React.FC = () => {
             className="text-[10px] px-2 py-0.5 rounded-md dark:bg-[#181B24] bg-[#F8FAFC] dark:text-indigo-300 text-indigo-600 font-mono hover:dark:bg-slate-800 hover:bg-white transition-colors border dark:border-slate-800 border-slate-300/70 font-semibold"
             title="Check for updates"
           >
-            v3.0.0
+            v3.0.1
           </button>
         </div>
       </div>

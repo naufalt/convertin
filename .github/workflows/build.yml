@@ -61,6 +61,9 @@ jobs:
       - name: Package Electron App (Unpacked)
         run: node build_unpacked.js
 
+      - name: Generate Official Store & Tile Assets
+        run: node generate_appx_assets.mjs
+
       - name: Build MSIX / APPX Package for Microsoft Store
         run: npx electron-builder --win appx
 

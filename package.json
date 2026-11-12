@@ -1,6 +1,6 @@
 {
   "name": "convertin",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Convertin // Offline Media and File Converter",
   "author": "Ngoods",
   "main": "dist-electron/main.js",

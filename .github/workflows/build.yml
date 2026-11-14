@@ -4,7 +4,12 @@ on:
   push:
     tags:
       - 'v*' # Otomatis jalan saat tag rilis dibuat, contoh: v2.1.1
-  workflow_dispatch: # Bisa dijalankan manual lewat tombol 'Run workflow' di tab Actions
+  workflow_dispatch:
+    inputs:
+      target_tag:
+        description: 'Target Tag or Commit to build (e.g. v3.0.0). Leave empty to use current commit.'
+        required: false
+        default: ''
 
 permissions:
   contents: write # Dibutuhkan untuk membuat GitHub Release dan upload asset
@@ -16,6 +21,9 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.target_tag || github.ref }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -61,8 +69,20 @@ jobs:
       - name: Package Electron App (Unpacked)
         run: node build_unpacked.js
 
+      - name: Create Portable ZIP Package
+        shell: pwsh
+        run: |
+          $ver = (Get-Content package.json | ConvertFrom-Json).version
+          $portableZip = "release/Convertin-v$ver-Portable-win-x64.zip"
+          Write-Host "Creating portable archive: $portableZip"
+          Compress-Archive -Path "release\win-unpacked\*" -DestinationPath $portableZip -CompressionLevel Optimal -Force
+          Write-Host "Portable archive created successfully!"
+
       - name: Generate Official Store & Tile Assets
-        run: node generate_appx_assets.mjs
+        run: |
+          if (Test-Path "generate_appx_assets.mjs") {
+            node generate_appx_assets.mjs
+          }
 
       - name: Build MSIX / APPX Package for Microsoft Store
         run: npx electron-builder --win appx
@@ -85,14 +105,38 @@ jobs:
           name: Convertin-Store-MSIX
           path: release/*.appx
 
-      - name: Create GitHub Release & Upload Asset
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Upload Portable ZIP Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Convertin-Portable-ZIP
+          path: release/Convertin-*-Portable-win-x64.zip
+
+      - name: Determine Release Tag
+        id: rel_tag
+        shell: pwsh
+        run: |
+          $inputTag = "${{ github.event.inputs.target_tag }}".Trim()
+          if ($inputTag -ne "") {
+            $tag = $inputTag
+          } elseif ("${{ github.ref }}".StartsWith("refs/tags/")) {
+            $tag = "${{ github.ref_name }}"
+          } else {
+            $ver = (Get-Content package.json | ConvertFrom-Json).version
+            $tag = "v$ver"
+          }
+          Write-Host "Resolved release tag: $tag"
+          "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Create or Update GitHub Release & Upload Assets
+        if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.target_tag != ''
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.rel_tag.outputs.tag }}
           files: |
             release/installer/Convertin-Setup-*.exe
             release/*.appx
-          name: Convertin ${{ github.ref_name }}
+            release/Convertin-*-Portable-win-x64.zip
+          name: Convertin ${{ steps.rel_tag.outputs.tag }}
           draft: false
           prerelease: false
           generate_release_notes: true

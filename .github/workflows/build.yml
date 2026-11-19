@@ -31,20 +31,6 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install Inno Setup
-        shell: pwsh
-        run: |
-          choco install innosetup --no-progress -y
-          $innoPath = "C:\Program Files (x86)\Inno Setup 6"
-          if (-not (Test-Path $innoPath)) {
-            $innoPath = "C:\Program Files\Inno Setup 7"
-          }
-          if (-not (Test-Path $innoPath)) {
-            $innoPath = "C:\Program Files\Inno Setup 6"
-          }
-          Write-Host "Inno Setup path: $innoPath"
-          "$innoPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
       - name: Download FFmpeg Binaries
         shell: pwsh
         run: |
@@ -66,18 +52,6 @@ jobs:
       - name: Build Web App & Electron
         run: npm run build
 
-      - name: Package Electron App (Unpacked)
-        run: node build_unpacked.js
-
-      - name: Create Portable ZIP Package
-        shell: pwsh
-        run: |
-          $ver = (Get-Content package.json | ConvertFrom-Json).version
-          $portableZip = "release/Convertin-v$ver-Portable-win-x64.zip"
-          Write-Host "Creating portable archive: $portableZip"
-          Compress-Archive -Path "release\win-unpacked\*" -DestinationPath $portableZip -CompressionLevel Optimal -Force
-          Write-Host "Portable archive created successfully!"
-
       - name: Generate Official Store & Tile Assets
         run: |
           if (Test-Path "generate_appx_assets.mjs") {
@@ -87,29 +61,11 @@ jobs:
       - name: Build MSIX / APPX Package for Microsoft Store
         run: npx electron-builder --win appx
 
-      - name: Compile Installer with Inno Setup
-        shell: pwsh
-        run: |
-          # Mengompilasi installer.iss ke release/installer/Convertin-Setup-x64.exe
-          iscc installer.iss
-
-      - name: Upload Unsigned Installer Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Convertin-Setup-Installer
-          path: release/installer/Convertin-Setup-*.exe
-
       - name: Upload Store MSIX Package Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Convertin-Store-MSIX
           path: release/*.appx
-
-      - name: Upload Portable ZIP Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Convertin-Portable-ZIP
-          path: release/Convertin-*-Portable-win-x64.zip
 
       - name: Determine Release Tag
         id: rel_tag
@@ -133,9 +89,7 @@ jobs:
         with:
           tag_name: ${{ steps.rel_tag.outputs.tag }}
           files: |
-            release/installer/Convertin-Setup-*.exe
             release/*.appx
-            release/Convertin-*-Portable-win-x64.zip
           name: Convertin ${{ steps.rel_tag.outputs.tag }}
           draft: false
           prerelease: false

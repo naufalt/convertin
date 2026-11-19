@@ -1,6 +1,6 @@
 {
   "name": "convertin",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Convertin // Offline Media and File Converter",
   "author": "Ngoods",
   "main": "dist-electron/main.js",
@@ -33,6 +33,10 @@
         "from": "resources/icons",
         "to": "icons",
         "filter": ["**/*"]
+      },
+      {
+        "from": "electron/officeHelper.ps1",
+        "to": "officeHelper.ps1"
       }
     ],
     "win": {

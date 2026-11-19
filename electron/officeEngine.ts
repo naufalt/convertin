@@ -11,19 +11,23 @@ export interface OfficeCapabilities {
 let cachedCapabilities: OfficeCapabilities | null = null;
 
 function getScriptPath(): string {
-  // 1. Packed app: process.resourcesPath/app/dist-electron/officeHelper.ps1
+  // 1. MSIX / Store / electron-builder extraResources: process.resourcesPath/officeHelper.ps1
+  const extraResPath = path.join(process.resourcesPath || '', 'officeHelper.ps1');
+  if (fs.existsSync(extraResPath)) return extraResPath;
+
+  // 2. Packed app (unpacked): process.resourcesPath/app/dist-electron/officeHelper.ps1
   const appPath = path.join(process.resourcesPath || '', 'app', 'dist-electron', 'officeHelper.ps1');
   if (fs.existsSync(appPath)) return appPath;
 
-  // 2. Unpacked / dev in dist-electron directory
+  // 3. Unpacked / dev in dist-electron directory
   const devPath = path.join(__dirname, 'officeHelper.ps1');
   if (fs.existsSync(devPath)) return devPath;
 
-  // 3. Fallback to electron/ directory
+  // 4. Fallback to electron/ directory
   const electronPath = path.join(process.cwd(), 'electron', 'officeHelper.ps1');
   if (fs.existsSync(electronPath)) return electronPath;
 
-  return appPath;
+  return extraResPath;
 }
 
 export async function checkOfficeCapabilities(): Promise<OfficeCapabilities> {

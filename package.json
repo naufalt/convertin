@@ -1,6 +1,6 @@
 {
   "name": "convertin",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "Convertin // Offline Media and File Converter",
   "author": "Ngoods",
   "main": "dist-electron/main.js",
@@ -27,12 +27,16 @@
       {
         "from": "resources/bin",
         "to": "bin",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       },
       {
         "from": "resources/icons",
         "to": "icons",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       },
       {
         "from": "electron/officeHelper.ps1",
@@ -56,6 +60,7 @@
     "@resvg/resvg-js": "^2.6.2",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
+    "marked": "^18.2.1",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^3.11.174",
     "tailwind-merge": "^3.0.2",

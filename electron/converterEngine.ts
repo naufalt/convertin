@@ -8,6 +8,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { Worker } from 'node:worker_threads';
 import Module from 'node:module';
 import { convertOfficeDocument } from './officeEngine';
+import { convertMarkdownToPdf } from './markdownEngine';
 import { inspectPdfForDocxConversion } from './pdfInspector';
 
 // Polyfill and intercept canvas for pdfjs-dist
@@ -141,6 +142,15 @@ export async function executeConversion(
 
   const inputExt = path.extname(inputPath).toLowerCase().replace('.', '');
   const targetExt = targetFormat.toLowerCase();
+
+  // Special handler: Markdown (.md / .markdown) to vector copyable PDF
+  if (['md', 'markdown'].includes(inputExt) && targetExt === 'pdf') {
+    mainWindow?.webContents.send('conversion-progress', { id, percent: 10 });
+    return await convertMarkdownToPdf(inputPath, finalOutputPath, (pct) => {
+      mainWindow?.webContents.send('conversion-progress', { id, percent: pct });
+      onProgressUpdate?.(pct);
+    });
+  }
 
   // Special handler: Office Documents (docx, pptx, xlsx to PDF, or PDF to docx)
   const isOfficeInput = ['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(inputExt);

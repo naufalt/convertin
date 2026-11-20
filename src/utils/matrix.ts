@@ -33,7 +33,7 @@ export const CONVERSION_MATRIX = {
     }
   },
   document: {
-    inputs: ['pdf', 'docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'txt', 'rtf', 'csv'],
+    inputs: ['pdf', 'docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'txt', 'rtf', 'csv', 'md', 'markdown'],
     outputs: ['pdf', 'docx', 'png', 'jpg', 'webp'],
     defaultOutput: 'pdf'
   }
@@ -55,7 +55,7 @@ export function getSupportedOutputs(extension: string): string[] {
   if (type === 'audio') return CONVERSION_MATRIX.audio.outputs;
   if (type === 'image') return CONVERSION_MATRIX.image.outputs;
   if (type === 'document') {
-    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(ext)) {
+    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv', 'md', 'markdown'].includes(ext)) {
       return ['pdf'];
     }
     if (ext === 'pdf') {
@@ -79,7 +79,7 @@ export function getDefaultTargetFormat(extension: string): string {
     return ext === 'png' ? 'jpg' : 'png';
   }
   if (type === 'document') {
-    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv'].includes(ext)) {
+    if (['docx', 'doc', 'pptx', 'ppt', 'xlsx', 'xls', 'rtf', 'txt', 'csv', 'md', 'markdown'].includes(ext)) {
       return 'pdf';
     }
     if (ext === 'pdf') {

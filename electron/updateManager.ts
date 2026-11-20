@@ -71,57 +71,16 @@ function compareVersions(v1: string, v2: string): number {
 let downloadedInstallerPath: string | null = null;
 
 export function setupUpdateManager(mainWindow: Electron.BrowserWindow | null) {
-  // Check for updates
+  // Check for updates (managed via Microsoft Store — no GitHub API call)
   ipcMain.handle('updater:check', async (): Promise<UpdateInfo> => {
     const currentVersion = app.getVersion();
-    try {
-      const release = await fetchLatestRelease();
-      if (!release) {
-        return {
-          hasUpdate: false,
-          currentVersion,
-          latestVersion: currentVersion,
-          releaseName: '',
-          releaseNotes: ''
-        };
-      }
-
-      const latestTag = release.tag_name || release.name || '';
-      const hasUpdate = compareVersions(latestTag, currentVersion) > 0;
-
-      // Find Windows installer asset (.exe)
-      let downloadUrl: string | undefined;
-      let fileName: string | undefined;
-
-      if (Array.isArray(release.assets)) {
-        const exeAsset = release.assets.find((a: any) => a.name?.toLowerCase().endsWith('.exe'));
-        if (exeAsset) {
-          downloadUrl = exeAsset.browser_download_url;
-          fileName = exeAsset.name;
-        }
-      }
-
-      return {
-        hasUpdate,
-        currentVersion,
-        latestVersion: latestTag.replace(/^v/i, ''),
-        releaseName: release.name || latestTag,
-        releaseNotes: release.body || 'No release notes provided.',
-        downloadUrl,
-        fileName,
-        publishedAt: release.published_at
-      };
-    } catch (err: any) {
-      console.error('[Updater] Failed to check for update:', err);
-      return {
-        hasUpdate: false,
-        currentVersion,
-        latestVersion: currentVersion,
-        releaseName: '',
-        releaseNotes: '',
-        fileName: err.message
-      };
-    }
+    return {
+      hasUpdate: false,
+      currentVersion,
+      latestVersion: currentVersion,
+      releaseName: 'Microsoft Store',
+      releaseNotes: 'Pembaruan ConvertIn dikelola secara otomatis melalui Microsoft Store.'
+    };
   });
 
   // Download update

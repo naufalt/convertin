@@ -12,8 +12,10 @@ import {
   ExternalLink,
   Heart,
   Languages,
+  X,
 } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import qrisNgoods from '../assets/qris-ngoods.jpg';
 
 export const SettingsView: React.FC = () => {
   const settings = useAppStore((state) => state.settings);
@@ -26,6 +28,7 @@ export const SettingsView: React.FC = () => {
   const t = useAppStore((state) => state.t());
 
   const [startupEnabled, setStartupEnabled] = useState(false);
+  const [showQrisModal, setShowQrisModal] = useState(false);
 
   useEffect(() => {
     if (window.electronAPI?.getStartupEnabled) {
@@ -344,9 +347,9 @@ export const SettingsView: React.FC = () => {
               </button>
 
               <button
-                onClick={() => handleOpenExternal('https://saweria.co/naufalt')}
+                onClick={() => setShowQrisModal(true)}
                 className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm transition-all active:scale-95 flex items-center gap-1.5"
-                title="Buy Naufaal a cup of Matcha"
+                title="Scan QRIS Ngoods to Buy Me a Matcha"
               >
                 <CupSoda className="w-3.5 h-3.5" />
                 <span>{t.buyMatcha}</span>
@@ -378,6 +381,49 @@ export const SettingsView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* QRIS Ngoods Modal */}
+      {showQrisModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+          onClick={() => setShowQrisModal(false)}
+        >
+          <div
+            className="relative w-full max-w-xs rounded-2xl dark:bg-[#13151C] bg-white border dark:border-slate-800 border-slate-200 shadow-2xl p-5 flex flex-col items-center text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowQrisModal(false)}
+              className="absolute top-3 right-3 p-1.5 rounded-lg dark:text-slate-400 text-slate-500 hover:dark:bg-slate-800 hover:bg-slate-100 transition-colors"
+              aria-label="Close QRIS modal"
+            >
+              <X className="w-4 h-4" />
+            </button>
+
+            <div className="flex items-center gap-1.5 text-emerald-500 font-semibold text-xs mb-1">
+              <CupSoda className="w-4 h-4" />
+              <span>{t.buyMatcha}</span>
+            </div>
+            <p className="text-[11px] dark:text-slate-400 text-slate-500 mb-3">
+              QRIS a.n. <span className="font-semibold dark:text-slate-200 text-slate-700">Ngoods</span>
+            </p>
+
+            <div className="bg-white p-2.5 rounded-xl border border-slate-200 shadow-inner">
+              <img
+                src={qrisNgoods}
+                alt="QRIS Ngoods"
+                className="w-56 h-56 object-contain rounded-lg"
+              />
+            </div>
+
+            <p className="text-[10px] dark:text-slate-400 text-slate-500 mt-3 leading-relaxed">
+              {language === 'id'
+                ? 'Scan QRIS di atas dengan e-wallet atau mobile banking favorit Anda. Terima kasih!'
+                : 'Scan the QRIS above with your favorite e-wallet or mobile banking app. Thank you!'}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

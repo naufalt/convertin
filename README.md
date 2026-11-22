@@ -5,19 +5,13 @@
 
   <p>
     <a href="https://github.com/naufalt/convertin/releases/latest">
-      <img src="https://img.shields.io/github/v/release/naufalt/convertin?color=6366f1&style=for-the-badge&logo=github&label=Download%20v3.0.0" alt="Download Convertin" />
+      <img src="https://img.shields.io/github/v/release/naufalt/convertin?color=6366f1&style=for-the-badge&logo=github&label=Release%20v3.0.5" alt="Download Convertin" />
     </a>
     <a href="https://github.com/naufalt/convertin/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge" alt="MIT License" />
     </a>
     <img src="https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue?style=for-the-badge&logo=windows" alt="Windows Support" />
     <img src="https://img.shields.io/badge/100%25-Offline-purple?style=for-the-badge" alt="100% Offline" />
-  </p>
-
-  <p>
-    <a href="https://saweria.co/naufalt">
-      <img src="https://img.shields.io/badge/🍵%20Traktir%20Matcha-Saweria-059669?style=for-the-badge" alt="Support on Saweria" />
-    </a>
   </p>
 </div>
 
@@ -60,8 +54,8 @@ Convertin adalah aplikasi desktop Windows yang memproses semua berkas **100% sec
 * **🔎 Riwayat Konversi & Pencarian Cepat:** Dilengkapi fitur pencarian nama file, pagination, serta perbandingan ukuran file sebelum vs sesudah konversi.
 * **📐 Sidebar Interaktif:** Sidebar navigasi modern yang bisa diperlebar (*expand*) atau diperkecil (*minimize*) dengan animasi transisi yang halus.
 * **🌐 Pilihan Bahasa:** Mendukung Bahasa Indonesia dan English yang bisa diganti kapan saja secara instan.
-* **🔄 Pembaruan Otomatis (OTA):** Notifikasi update langsung di dalam aplikasi saat versi baru tersedia di GitHub.
-* **🏪 Segera Hadir di Microsoft Store:** Sedang dalam tahap rilis resmi di Windows Store.
+* **🔄 Pembaruan Otomatis via Microsoft Store:** Pembaruan aplikasi dikelola secara resmi dan otomatis melalui Microsoft Store.
+* **🏪 Tersedia Resmi di Microsoft Store:** Terverifikasi dan aman dipasang langsung dari Microsoft Store untuk Windows 10 & Windows 11.
 
 ---
 
@@ -72,15 +66,14 @@ Convertin adalah aplikasi desktop Windows yang memproses semua berkas **100% sec
 | **🎬 Video** | MP4, MKV, MOV, WebM, AVI, GIF Animasi |
 | **🎵 Audio** | MP3, WAV, FLAC, AAC, OGG, M4A, Ekstraksi Audio dari Video |
 | **🖼️ Gambar** | PNG, JPG, JPEG, WEBP, AVIF, ICO, BMP, TIFF, SVG Vektor |
-| **📄 Dokumen & Office** | Word (DOCX), Excel (XLSX), PowerPoint (PPTX) ke PDF, dan PDF ke Gambar/Dokumen |
+| **📄 Dokumen & Markdown** | Word (DOCX) & Markdown (MD) ke PDF **100% mandiri tanpa perlu Microsoft Word** (teks *copyable*), Excel (XLSX) & PowerPoint (PPTX) ke PDF, serta PDF ke Gambar/DOCX |
 
 ---
 
 ## 🚀 Cara Mudah Menggunakan
 
-1. **Unduh Installer:** Unduh berkas instalasi terbaru di [GitHub Releases](https://github.com/naufalt/convertin/releases/latest) (pilih `Convertin-Setup-v3.0.0-x64.exe`).
-2. **Pasang di Komputer:** Buka installer dan tentukan folder instalasi yang Anda inginkan (secara bawaan terpasang rapi di `Program Files`).
-3. **Mulai Konversi:**
+1. **Unduh Aplikasi:** Pasang langsung melalui **Microsoft Store** (cari **ConvertIn**) atau unduh paket `.appx` di [GitHub Releases](https://github.com/naufalt/convertin/releases/latest).
+2. **Mulai Konversi:**
    * **Cara 1 (Di Aplikasi):** Buka Convertin, tarik berkas Anda ke layar, pilih format, lalu klik **Mulai Konversi**.
    * **Cara 2 (Paling Cepat):** Di folder mana saja di komputer Anda, klik berkas yang ingin diubah, tekan keyboard **`Ctrl + Q`**, dan klik format tujuan pada roda yang muncul!
 
@@ -97,9 +90,7 @@ Convertin adalah aplikasi desktop Windows yang memproses semua berkas **100% sec
 
 Convertin adalah proyek independen dan sumber terbuka (*open-source*) yang dibuat gratis tanpa iklan untuk membantu produktivitas sehari-hari.
 
-Jika Convertin membantu mempermudah pekerjaan atau tugas Anda, Anda dapat memberikan apresiasi dan mentraktir secangkir Matcha hangat untuk pengembang melalui:
-
-👉 **[Traktir Matcha di Saweria (saweria.co/naufalt)](https://saweria.co/naufalt)** 🍵
+Jika Convertin membantu mempermudah pekerjaan atau tugas Anda, Anda dapat memberikan apresiasi dan mentraktir secangkir Matcha hangat untuk pengembang melalui **QRIS (a.n. Ngoods)** langsung dari tombol **Buy Me a Matcha** di menu **Settings / Preferences** aplikasi.
 
 Apresiasi Anda sangat berharga untuk terus merawat dan mengembangkan fitur-fitur baru di Convertin!
 

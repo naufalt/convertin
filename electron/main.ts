@@ -36,10 +36,20 @@ let currentTrayStatusText = 'Convertin // Ready';
 let lastFinishedOutputPath: string | null = null;
 
 function getAppTrayIcon(): Electron.NativeImage {
-  const icoPath = path.join(process.cwd(), 'resources', 'icons', 'app_tray.ico');
-  if (fs.existsSync(icoPath)) {
-    const icon = nativeImage.createFromPath(icoPath);
-    return icon.resize({ width: 16, height: 16 });
+  const candidates = [
+    path.join(process.resourcesPath || '', 'icons', 'app_tray.ico'),
+    path.join(process.cwd(), 'resources', 'icons', 'app_tray.ico'),
+    path.join(process.resourcesPath || '', 'icons', 'app-icon.png'),
+    path.join(process.cwd(), 'resources', 'icons', 'app-icon.png'),
+  ];
+
+  for (const iconPath of candidates) {
+    if (iconPath && fs.existsSync(iconPath)) {
+      const icon = nativeImage.createFromPath(iconPath);
+      if (!icon.isEmpty()) {
+        return icon.resize({ width: 16, height: 16 });
+      }
+    }
   }
 
   const iconBase64 =

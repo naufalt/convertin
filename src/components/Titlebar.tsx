@@ -5,7 +5,7 @@ import { APP_ICON_BASE64 } from '../assets/appIconBase64';
 import { useAppStore } from '../store/useAppStore';
 
 export const Titlebar: React.FC = () => {
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(true);
   const t = useAppStore((state) => state.t());
 
   const handleMinimize = () => window.electronAPI?.minimizeWindow();

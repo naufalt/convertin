@@ -84,8 +84,8 @@ export const translations = {
     devName: 'Dikembangkan oleh Naufaal Muhammad',
     devDesc: 'Convertin 100% gratis, bebas iklan, open-source, dan offline-first. Jika aplikasi ini membantu pekerjaan Anda, traktir Matcha untuk pengembang!',
     buyMatcha: 'Traktir Matcha',
-    msStoreSoonTitle: 'Segera Hadir di Microsoft Store',
-    msStoreSoonDesc: 'Convertin sedang dalam proses pengajuan ke Microsoft Store agar Anda dapat mengunduh dan memperbarui secara resmi langsung dari Windows Store.',
+    msStoreSoonTitle: 'Tersedia di Microsoft Store',
+    msStoreSoonDesc: 'Convertin kini tersedia resmi di Microsoft Store. Klik di sini untuk membuka halaman aplikasi di Windows Store dan mendapatkan pembaruan otomatis.',
 
     // System View
     sysTitle: 'Monitor Sistem & Perangkat Keras',
@@ -215,8 +215,8 @@ export const translations = {
     devName: 'Developed by Naufaal Muhammad',
     devDesc: 'Convertin is 100% free, ad-free, open-source, and offline-first. If this tool saves your time, consider supporting the developer with a cup of Matcha!',
     buyMatcha: 'Buy Me a Matcha',
-    msStoreSoonTitle: 'Coming Soon to Microsoft Store',
-    msStoreSoonDesc: 'Convertin is currently undergoing submission to the Microsoft Store so you can install and update officially straight from Windows Store.',
+    msStoreSoonTitle: 'Available on Microsoft Store',
+    msStoreSoonDesc: 'Convertin is now officially available on Microsoft Store. Click here to open Windows Store and receive automatic updates.',
 
     // System View
     sysTitle: 'System & Hardware Monitor',

@@ -359,27 +359,34 @@ export const SettingsView: React.FC = () => {
           </div>
         </div>
 
-        {/* Coming Soon Microsoft Store Banner */}
-        <div className="p-4 rounded-2xl dark:bg-[#13151C] bg-[#F8FAFC] border dark:border-indigo-500/25 border-indigo-500/30 flex items-start gap-3 shadow-sm">
-          <div className="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+        {/* Available on Microsoft Store Banner */}
+        <button
+          type="button"
+          onClick={() => handleOpenExternal('ms-windows-store://search/?query=ConvertIn')}
+          className="w-full text-left p-4 rounded-2xl dark:bg-[#13151C] bg-[#F8FAFC] border dark:border-emerald-500/25 border-emerald-500/30 hover:dark:border-emerald-500/50 hover:border-emerald-500/50 flex items-start gap-3 shadow-sm transition-all cursor-pointer group"
+        >
+          <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
               <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/>
             </svg>
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold dark:text-slate-100 text-slate-800">
-                {t.msStoreSoonTitle}
-              </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full dark:bg-indigo-500/20 bg-indigo-500/10 text-indigo-500 font-semibold font-mono">
-                SOON
-              </span>
+          <div className="flex-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-bold dark:text-slate-100 text-slate-800">
+                  {t.msStoreSoonTitle}
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full dark:bg-emerald-500/20 bg-emerald-500/10 text-emerald-500 font-semibold font-mono">
+                  AVAILABLE
+                </span>
+              </div>
+              <ExternalLink className="w-3.5 h-3.5 dark:text-slate-400 text-slate-500 group-hover:text-emerald-500 transition-colors flex-shrink-0" />
             </div>
             <p className="text-[11px] dark:text-slate-400 text-slate-500 mt-1 leading-relaxed">
               {t.msStoreSoonDesc}
             </p>
           </div>
-        </div>
+        </button>
       </div>
 
       {/* QRIS Ngoods Modal */}

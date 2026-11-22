@@ -222,38 +222,14 @@ export const UpdateModal: React.FC<UpdateModalProps> = ({
 
           <div className="flex items-center gap-2">
             {updateInfo?.hasUpdate ? (
-              readyToInstall ? (
-                <button
-                  onClick={handleInstallAndRestart}
-                  className="px-4 py-2 rounded-2xl text-xs font-semibold dark:bg-emerald-500 bg-emerald-600 text-white hover:opacity-90 transition-opacity shadow-sm"
-                >
-                  Restart & Pasang Sekarang
-                </button>
-              ) : downloading ? (
-                <button
-                  disabled
-                  className="px-4 py-2 rounded-2xl text-xs font-semibold dark:bg-white/10 bg-black/10 dark:text-zinc-400 text-zinc-600 cursor-not-allowed flex items-center gap-1.5"
-                >
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Mengunduh ({downloadPercent}%)</span>
-                </button>
-              ) : updateInfo.downloadUrl ? (
-                <button
-                  onClick={handleStartDownload}
-                  className="px-4 py-2 rounded-2xl text-xs font-semibold dark:bg-md-darkPrimary bg-md-primary dark:text-md-darkOnPrimary text-md-onPrimary hover:opacity-90 transition-opacity shadow-sm flex items-center gap-1.5"
-                >
-                  <DownloadCloud className="w-3.5 h-3.5" />
-                  <span>Download Update</span>
-                </button>
-              ) : (
-                <button
-                  onClick={() => window.electronAPI?.openReleasePage?.()}
-                  className="px-4 py-2 rounded-2xl text-xs font-semibold dark:bg-md-darkPrimary bg-md-primary dark:text-md-darkOnPrimary text-md-onPrimary hover:opacity-90 transition-opacity shadow-sm flex items-center gap-1.5"
-                >
-                  <span>Buka Halaman Rilis</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </button>
-              )
+              <button
+                onClick={() => window.electronAPI?.openPath?.('ms-windows-store://search/?query=ConvertIn')}
+                className="px-4 py-2 rounded-2xl text-xs font-semibold dark:bg-emerald-500 bg-emerald-600 text-white hover:opacity-90 transition-opacity shadow-sm flex items-center gap-1.5"
+              >
+                <DownloadCloud className="w-3.5 h-3.5" />
+                <span>Update di Microsoft Store</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </button>
             ) : (
               <button
                 onClick={onClose}

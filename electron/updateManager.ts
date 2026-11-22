@@ -71,16 +71,43 @@ function compareVersions(v1: string, v2: string): number {
 let downloadedInstallerPath: string | null = null;
 
 export function setupUpdateManager(mainWindow: Electron.BrowserWindow | null) {
-  // Check for updates (managed via Microsoft Store — no GitHub API call)
+  // Check for updates against GitHub Releases metadata, then refer user to Microsoft Store
   ipcMain.handle('updater:check', async (): Promise<UpdateInfo> => {
     const currentVersion = app.getVersion();
-    return {
-      hasUpdate: false,
-      currentVersion,
-      latestVersion: currentVersion,
-      releaseName: 'Microsoft Store',
-      releaseNotes: 'Pembaruan ConvertIn dikelola secara otomatis melalui Microsoft Store.'
-    };
+    try {
+      const release = await fetchLatestRelease();
+      if (!release) {
+        return {
+          hasUpdate: false,
+          currentVersion,
+          latestVersion: currentVersion,
+          releaseName: 'Microsoft Store',
+          releaseNotes: 'Pembaruan ConvertIn dikelola melalui Microsoft Store.'
+        };
+      }
+
+      const latestTag = release.tag_name || release.name || '';
+      const hasUpdate = compareVersions(latestTag, currentVersion) > 0;
+
+      return {
+        hasUpdate,
+        currentVersion,
+        latestVersion: latestTag.replace(/^v/i, ''),
+        releaseName: release.name || latestTag,
+        releaseNotes: release.body || 'Pembaruan tersedia di Microsoft Store.',
+        downloadUrl: 'ms-windows-store://search/?query=ConvertIn',
+        publishedAt: release.published_at
+      };
+    } catch (err: any) {
+      console.error('[Updater] Failed to check for update:', err);
+      return {
+        hasUpdate: false,
+        currentVersion,
+        latestVersion: currentVersion,
+        releaseName: 'Microsoft Store',
+        releaseNotes: 'Pembaruan ConvertIn dikelola melalui Microsoft Store.'
+      };
+    }
   });
 
   // Download update
